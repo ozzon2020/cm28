@@ -1,0 +1,8 @@
+{{ object.name}}
+{{ object.description }}
+{{ object.about }}
+{{ object.priem }}
+{{ object.sostav }}
+{{ object.kurs }}
+{{ object.izgotovitel }}
+

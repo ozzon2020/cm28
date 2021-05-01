@@ -1,0 +1,101 @@
+{% extends "base_general.html" %}
+{% block title %}с тегом  #{{ tag.name }} на 28cm.ru {% endblock %}
+
+{% block meta_description %}Страницы с тегом : #{{ tag.name }}{% endblock %}
+{% block meta_keywords %}Страницы с тегом : #{{ tag.name }} на 28cm.ru{% endblock %}
+{% block og_title %}Страницы с тегом : #{{ tag.name }} на 28cm.ru{% endblock %}
+{% block og_description %}Страницы с тегом : #{{ tag.name }} на 28cm.ru{% endblock %}
+{% block og_url %}{% url "content:section_list_by_tag" tag.slug %}{% endblock %}
+{% block item_name %}Страницы с тегом : #{{ tag.name }} на 28cm.ru{% endblock %}
+{% block item_description %}Результаты с меткой #{{ tag.name }}{% endblock %}
+{% block canonical %}{% url "content:section_list_by_tag" tag.slug %}{% endblock%}
+
+{% block breadcrumbs %}   
+{{ block.super }}
+ <span class="divider"> > </span>  "{{ tag.name | capfirst}}"
+{% endblock %}
+
+
+{% block content_main %}
+<div class="ui grid container stackable" >
+        
+<div class=" sixteen wide tablet mobile only column twelve wide computer only column" > 
+  
+    {% if tag %}
+    <h3 class="ui header">Страницы с меткой "{{ tag.name }}"</h3>
+   {% endif %}
+  
+
+{% if object_list %}
+<div class="ui middle aligned  list">
+    {% for objmy in object_list %}
+       {% if objmy.active == 1 %}
+    <div class="item"> 
+<!--<i class="file outline icon orange large"></i>-->
+        <div class="content">
+            <div class="header"><a href="{{ objmy.get_absolute_url }}" >{{ objmy.name}}</a> ( {{objmy.ch}} ) </div>
+            <div class="description"><a href="{{ objmy.get_absolute_url }}" >{{ objmy.main|striptags|truncatewords_html:50 }}</a> 
+          
+           
+          
+                <div class="ui list">
+                <i class="tag icon blue"></i>
+                    
+                    {% for tag in objmy.tags.all %}
+                     #<a href="{% url "content:section_list_by_tag" tag.slug %}"  rel="nofollow" class="ui small" 
+                     data-tooltip="Поиск по тэгу {{ tag.name }}" data-inverted="" data-position="top right">
+                     {{ tag.name }}
+                     </a>
+                 
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    <div class="ui hidden  divider"></div>
+    </div>
+       {% endif %}  
+    {% endfor %}
+</div>
+{% else %}
+    <p>Нет страниц на сайте.</p>
+{% endif %}  
+
+{% block paginated %}      
+{{ block.super }}
+{% endblock paginated %} 
+ 
+ 
+</div>
+<!-------------------promo-------------------------->
+<div class="computer only column four wide"> 
+
+        {%if leftblock.active%}
+        {{ leftblock.main|safe}}
+        {%endif%}
+        {% if leftblock2.active %}
+        {{ leftblock2.main|safe}}
+        {%endif%}
+ {% include "promo/240x400.html"  %}  
+
+</div> 
+<div class="tablet only ui equal width row"> 
+{% include "promo/728x90.html"  %}
+ </div> 
+</div>
+<!--</div>-->
+<!--</div>-->
+
+
+<div class="sixteen wide mobile only column"> 
+ {% include "promo/320x100.html"  %} 
+ {% include "promo/320x100.html"  %}  
+</div> 
+<!-------------------promo-------------------------->
+{% endblock content_main %}
+ {% block footer_12 %}
+ {% include "content/__footer_menu_category.html"  %}
+{% endblock footer_12 %}  
+
+ 
+ {% block domready %}
+ {% endblock %}

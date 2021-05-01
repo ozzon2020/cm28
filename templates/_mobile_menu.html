@@ -1,0 +1,144 @@
+   <!--  Mobile -->  
+    <div class="ui mobile tablet only padded grid" >
+      <div class="ui top fixed borderless fluid menu mobile small">
+        <div class="brand item">
+                           <!--<a href="/"> <img class="ui avatar image spaced" src="/static/images/logo2_r.png">-->
+                            <span class="ui header sub blue ">28cm.ru</span></a>
+          </div>
+        <div class="right menu">
+          <div class="item">
+            <button class="ui icon toggle basic button blue">
+              <i class="content icon large blue"></i>
+            </button>
+          </div>
+        </div>
+        <div class="ui vertical scrolling fluid menu ">
+        <div class="item">
+              <div class="ui  text menu">
+              <a class="item " href="/"><i class="home icon "></i></a> 
+              
+                    <div class="right menu ">
+                    {% with total_items=cart|length %}
+                            <div class="item {% if orders_item %} active {%endif%}">
+                            {% if cart|length > 0 %}
+                            
+                            <a  href="{% url "shop:cart_detail" %}">
+                           <i class="cart icon "></i>
+                             <span class="floating ui mini circular blue label inverted"> 
+                                {{ total_items }}
+                             </span>
+                            
+                            {% else %}
+                            <a  href="{% url "shop:razdel-list" %}"><i class="cart icon"></i>
+                            {% endif %}
+                            </a>
+                            </div>
+                  {% endwith %}  
+                       
+                      <a href="" class="item" ><i class="id mail icon "></i></a> 
+                    </div>
+              </div>
+        </div>
+          
+          <form method="get" action="/search/result/" class="item">
+                        <div class="ui left icon input">
+                 <i class="search icon"></i>
+                 <input type="text" name="q" placeholder="Поиск...">
+                
+               </div>
+          </form>   
+ <!--class="ui scrolling dropdown">-->
+           <!----------------------------------------->
+
+      <!--</div>-->
+     <div class=" item ">
+           <div class="ui sub header blue">Каталог</div>
+
+          {% for objmy in menu_product %}
+              <div class="ui scrolling dropdown item tiny
+              {% if objmy.namefile == category.var.namefile  or objmy.namefile ==  product.category.var.namefile%} blue inverted {% endif %}">
+            
+              {{objmy.name}} 
+              <i class="chevron down icon  {% if objmy.namefile == category.var.namefile  or objmy.namefile ==  product.category.var.namefile%} blue {% endif %} "></i>
+                <div class="menu tiny ">
+                 {% for pr in objmy.medrazdel.all  %}
+
+                 <a href="{% url "shop:category-list" pr.slug %}" class="item  
+                 {% if category.slug == pr.slug or product.category.slug ==  pr.slug%} active  {% endif %}  ">
+                       {{pr.name}} 
+                  <i class=" 
+                  {% if category.slug == pr.slug  or product.category.slug ==  pr.slug%} blue {% endif %}  chevron right icon tiny"></i>
+                   
+                    </a>
+                    <div class="ui fitted divider"></div>
+
+                    {% for prod in pr.products.all %}
+                        {% if prod.active == True and createnow > prod.created  %}
+                        
+                          <a href="{{ prod.get_absolute_url }}" title="{{prod.name}}"  
+                               class="{% if product.slug == prod.slug %} active {% endif %}  item  " >
+                            <i class=" {% if product.slug == prod.slug  or pr.category.slug == prod.slug %} blue {% endif %}  caret right icon tiny"></i>
+                            {{prod.name}} {{prod.namefile}} 
+                           </a>
+                               {% endif %}                      
+                     {% endfor %} 
+                     {% endfor %}   
+                </div>
+          
+              
+          
+              </div>                     
+
+             
+                                     
+         {% endfor %}  
+          <!--</div>-->
+    
+      </div>
+      <!----------------------------------------->
+      
+           <div class=" item ">
+           <!--<div class="ui sub header blue">Статьи</div>-->
+           
+            <!--<div class="menu tiny _my">-->
+<!--class="ui divided selection list"-->
+        <div class="ui scrolling dropdown item blue">Статьи<i class="chevron down icon"></i>
+        <div class="menu tiny">
+          {% for objmy in menu_page %}
+           
+             {% for linkpage in objmy.chastrazdel.all %}
+              {% if linkpage.active  %}
+             
+               
+                   <span class="active  item">{{linkpage.name}}</span>
+                   <!--<div class="divider"></div>-->
+                    {% for page in linkpage.chrazdel.all %}
+                        {% if page.active == True and createnow > page.created  %}
+                          <a href="{{ page.get_absolute_url }}" title="{{page.name}}"  
+                               class="{% if section.namefile == page.namefile %} active {% endif %}  item  " >
+                            <i class=" {% if section.namefile == page.namefile %} blue {% endif %}  caret right icon "></i>{{page.name}}
+                           </a>
+                       {% endif %}                      
+                     {% endfor %} 
+                 
+              <!--</div>                     -->
+
+             {% endif %}  
+              
+           {% endfor %}  
+          
+         {% endfor %}  
+          </div>  
+          </div>
+        
+      </div>
+     
+
+          
+          <a href="{% url "qs:questions-detail" %}" class="item">Вопросы / Ответы</a>
+
+        </div>
+      </div>
+    </div>
+    
+    <!-- End Mobile -->

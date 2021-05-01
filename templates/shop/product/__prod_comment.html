@@ -1,0 +1,25 @@
+        <div class="ui stackable small feed" id="comment-product">
+            <div class="event">
+        
+                <div class="label">
+                 <img class="ui top aligned left floated spaced small image"  src="/static/images/pic/pic-b.jpg">
+                </div>
+                <div class="content" >
+                    <div class="summary">{{comment.name}}</div>
+                    <div class="summary">
+                    
+                    <div class="ui mini heart rating " data-icon="star" data-rating="{{comment.rating}}"></div>
+                    
+                    <div class="date" ><i class="clock outline icon "></i> {{ comment.created|timesince }}   </div>
+                   
+                    </div>
+                </div>
+       
+            </div>
+        </div>
+    
+        <div class="ui tiny text" >  
+         {{ comment.body|safe }} 
+        </div>
+     
+        <div class="ui clearing  divider"></div>

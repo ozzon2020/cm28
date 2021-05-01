@@ -1,0 +1,124 @@
+
+
+<!--comp only-->
+<!--<div class="computer only column four wide  aligned ">-->
+
+       <!--<div class="ui fluid card" >-->
+  
+              <!--<div class="content">-->
+                <!--<div class="ui sub header"><a href="">Баннер</a></div>-->
+                <!--<div class="ui clearing divider"></div>-->
+
+
+                    <!--<img class="right floated small ui image" src="/static/images/TEMP/fon9.jpg" >-->
+
+                    <!--<div class="ui small feed"></div>-->
+      
+              <!--</div>-->
+              
+              <!--<div class="extra content ">-->
+                  <!--<a href="" class="ui basic button small left black ">Читать</a>-->
+                    <!--<div class="mini right floated"><i class="eye icon orange"></i>-->
+            
+                      <!--<a href=""  data-tooltip="Задать вопрос врачу - " data-inverted="" data-position="top left"><i class="user md icon orange"></i></a>-->
+                    
+            
+                     <!--<a  href="" data-tooltip="Комментарии" data-inverted="" data-position="top left"><i class="comment icon orange"></i></a> -->
+                   
+                    <!--</div>-->
+              
+            <!--</div>-->
+     <!--</div>            -->
+    <!--start accordion-->
+    {% block four_content_main %}   
+  
+       <div class="ui  fluid styled accordion ui red"> 
+
+          {% for objmy in left_menu %}
+             {% for linkpage in objmy.chastrazdel.all %}
+              {% if linkpage.active  %}
+                    <div class="{% if section.ch.pk == linkpage.pk %} active {% endif %} title ui red fluid  left" >{{linkpage.name}}
+                   </div>
+                                      
+              <div class="{% if section.ch.pk == linkpage.pk %} active {% endif %}content"> 
+                 <div class="ui link list small middle aligned ui red"> 
+                    {% for page in linkpage.chrazdel.all %}
+                        {% if page.active == True and timenow > page.created  %}
+                            <a href="{{ page.get_absolute_url }}" title="{{page.name}}"  
+                               class="{% if section.namefile == page.namefile %} active {% endif %} item red inverted" >
+                            <i class="caret right icon "></i>{{page.name}}
+                           </a>
+                         {% endif %}                      
+                     {% endfor %}    
+                  </div>  
+              </div>
+             {% endif %}  
+           {% endfor %}                             
+         {% endfor %}  
+       <!--<div class="ui hidden  divider"></div>-->
+       
+      </div>  
+      <!--end accordion-->
+      <div class="ui fluid card" >
+  
+              <div class="content">
+                <div class="ui sub header"><a href="">Баннер</a></div>
+                <div class="ui clearing divider"></div>
+
+
+                    <img class="right floated small ui image" src="/static/images/TEMP/fon9.jpg" >
+
+                    <div class="ui small feed"></div>
+      
+              </div>
+              
+              <div class="extra content ">
+                  <a href="" class="ui basic button small left black ">Читать</a>
+                    <div class="mini right floated"><i class="eye icon orange"></i>
+            
+                      <a href=""  data-tooltip="Задать вопрос врачу - " data-inverted="" data-position="top left"><i class="user md icon orange"></i></a>
+                    
+            
+                     <a  href="" data-tooltip="Комментарии" data-inverted="" data-position="top left"><i class="comment icon orange"></i></a> 
+                   
+                    </div>
+              
+            </div>
+</div>  
+         {% include "promo/_rek_bot_section.html"  %} 
+      
+{% endblock four_content_main %}
+<!--END comp only-->    
+
+<!--<div class="ui  twelve  column" >-->
+         
+{% block twelve_content_main %}
+<div class="ui container">         
+  <!--<div class="ui clearing divider"></div>-->
+   {{ section.main |safe}}
+ {% include "content/_tags_views.html"  %}  
+
+    
+    
+         
+      
+  <!--start comments    -->
+   <!--<div> -->
+               <!--<div class="mobiledivider"></div>-->
+               <!--<div class="ui hidden  divider"></div>-->
+         <!--<div class="ui accordion">-->
+         <!--</div>-->
+<!--END conternet-->
+   </div>
+   <!--END twelve  column-->
+<!--</div>-->
+
+{% endblock twelve_content_main %}   
+
+   
+   
+   
+
+
+
+

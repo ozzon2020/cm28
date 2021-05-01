@@ -1,0 +1,26 @@
+<div class=" ui  twelve wide column " >
+Страницы :
+<div class="ui horizontal tiny  link list" > 
+<div class="item "></div>  
+    {% for objmy in menu_page %}
+    {% for linkpage in objmy.chastrazdel.all %}
+    <div class="item ">
+    <div class="ui sub header {% if section.ch.pk == linkpage.pk %}   blue {% endif %}">{{linkpage.name}}</div>
+   
+                {% for page in linkpage.chrazdel.all %}
+                {% if page.active == True and createnow > page.created  %}
+                <a href="{{ page.get_absolute_url }}" 
+                    class="{% if section.namefile == page.namefile %} active {% endif %}  item ">
+                         <i class=" {% if section.namefile == page.namefile %} blue {% endif %}  caret right icon tiny">
+                        </i>{{page.name}}
+                    </a>
+                {% endif %}
+               {% endfor %}
+         
+    </div>
+                
+    {% endfor %}  
+    {% endfor %}  
+</div>  
+</div>  
+<!--end accordion-->

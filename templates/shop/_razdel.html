@@ -1,0 +1,53 @@
+
+    
+{% for objmy in menu_product %}
+                    <div class="card mini" >
+                        <div class="blurring dimmable small image">
+                            <div class="ui dimmer inverted">
+                                <div class="content">
+                                    <div class="ui basic label inverted black">
+                                    {{objmy.about|safe}}
+                                   
+                                    </div>
+                                </div>
+                            </div>
+                            {%if objmy.image %}
+                            
+                             {% load thumbnail %}
+                            {% thumbnail objmy.image "200x110" crop="70%"  as im %}
+                            <img src="{{ im.url }}" >
+                            {% endthumbnail %}
+                            
+                            {%else%}
+                            <img src="/static/images/TEMP/antioksidanty_01.jpg" >
+                            {%endif%}
+                            
+                        </div>
+                        <div class="content">
+                        <!--<div class="summary">-->
+                        <span class="ui sub header centered blue">{{objmy.name}}</span>
+                        <a class="ui left corner label inverted blue large"><i class="venus mars icon white large"></i></a>
+                    <div class="meta ">
+                      <div class="summary">
+                                    {% for pr in objmy.medrazdel.all %}
+                                    {% if pr.active %}
+                                    <i class="check icon small"></i><a href="{% url "shop:category-list" pr.slug %}" class="ui  link list medium">
+                                            {{pr.name}}
+                                        </a>            
+                                               
+                                                    
+                                    {% endif %}
+                                   {% endfor %} 
+                        </div>
+                        </div>
+                    </div>
+                      
+                     
+                    </div>
+
+    {% endfor %}  
+                  
+   
+                
+                
+    

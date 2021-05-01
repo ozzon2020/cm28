@@ -1,0 +1,19 @@
+<div class="ui equal width stackable  " >
+<div class="ui divider"></div>
+         
+
+    {% with names=object.tags.names %}
+        {% if names.count > 0 %}
+  
+      <i class="tag icon blue"></i> 
+      {% for tag in section.tags.all %}
+      #<a href="{% url "content:section_list_by_tag" tag.slug %}"   rel="nofollow" class="ui small " data-tooltip="Поиск по тегу {{ tag.name }}" data-inverted="" data-position="top right"> {{ tag.name }}</a>
+        {% endfor %}
+        {% endif %}
+     
+      {% endwith %}
+      
+      <!--</div>-->
+ 
+    
+</div>

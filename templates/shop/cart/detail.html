@@ -1,0 +1,148 @@
+{% extends "base_general.html" %}
+{% load static %}
+
+
+{% block title %}Корзина покупок на сайте preparation.su {% endblock %}
+
+{% block meta_description %}Корзина покупок{% endblock %}
+{% block meta_keywords %}препараты, для секса, купить препараты, купить онлайн{% endblock %}
+{% block og_title %}ККорзина покупок на сайте preparation.su  {% endblock %}
+{% block og_description %}Корзина покупок на сайте preparation.su {% endblock %}
+{% block og_url %}{% url "shop:cart_detail" %}{% endblock %}
+{% block item_name %}Корзина покупок на сайте preparation.su{% endblock %}
+{% block item_description %}Корзина покупок на сайте preparation.su{% endblock %}
+{% block canonical %}{% url "shop:cart_detail" %}{% endblock%}
+
+
+
+{% block breadcrumbs %}
+Оформление заказа 
+<span class="divider">></span>  <a href="{% url "shop:razdel-list" %}">Препараты</a>
+<span class="divider">></span> Корзина
+
+{% endblock %}
+
+    
+{% block content_main %}
+
+<!--<div class="ui attached segment " >-->
+<div class="ui  container stackable ">
+<div class="tablet only  ui hidden  divider"></div>
+    <div class="ui three top mini attached steps  tablet computer only">
+    
+    {% block steps_top %}   
+      {% include "shop/cart/block.html"  %}  
+    {% endblock steps_top %}  
+    </div>
+
+ 
+<!--<div class="ui attached segment " >-->
+
+<table class="ui striped table tiny "  >
+ 
+   <thead id="cartpay" class="tablet computer only ">
+    <tr>
+    <th class="two wide">Препарат</th>
+    <th class="four wide">Название</th>
+    <th class="two wide">Выбор</th>
+    <th class="six wide right aligned">Цена</th>
+  </tr>
+</thead>
+
+   
+    {% for item in cart %}
+    {% with product=item.product %}
+
+
+        <tr>
+          <td ><a href="{{ product.get_absolute_url }}" ><img class="ui tiny image left floated " src="{% if product.image %}{{ product.image.url }}{% else %}
+        {% static "img/no_image.png" %}{% endif %}"></a></td>
+          <td class="left aligned">{{ product.name }} </td>
+         
+          <td class="left aligned four wide">
+          
+           <form action="{% url "shop:cart_add" product.id %}" method="post" class="ui tiny form">
+              
+              <div class="fields">
+
+             <div class="wide field" style="width:60px;"> 
+
+             {{ item.update_quantity_form.quantity }}{{ item.update_quantity_form.update }} 
+   
+             </div>
+              <div class="ui small basic icon buttons">
+     
+               
+              <button class="ui left attached button" type="submit" data-tooltip="Пересчитать" data-content="Пересчитать" ><i class="sync icon"></i></button>
+               <a href="{% url "shop:cart_remove" product.id %}" class="right attached ui button red" 
+               data-tooltip="Удалить"  data-position="bottom left" data-variation="wide"><i class="trash  icon  red"></i></a>
+              </div>
+       
+    
+            {% csrf_token %}
+            </div>
+            </form> 
+    
+        </td>
+          <td class="right aligned four wide">
+        {{ item.quantity}} x <span class="price small">{{ item.price }} <i class="ruble sign icon  small"></i></span>
+             <span class="ui sub header right aligned">сумма : <span class="price">{{ item.total_price }} <i class="ruble sign icon  small"></i></span></span>
+            </td>    
+        </tr>
+
+
+    {% endwith %}
+    {% endfor %}
+
+        <tr>
+            <td colspan="4" class="right aligned">
+            <h4 class="ui  header blue">Всего : <span class="price">{{ cart.get_total_price }} <i class="ruble sign icon  small"></i></span></h4>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="left aligned">
+            <div class="ui buttons">
+               <a href="{% url "shop:razdel-list" %}" class="ui labeled submit icon basic button small">
+               <i class="shopping basket icon blue"></i>Каталог</a>
+            {% if cart|length > 0 %}
+               <a href="{% url "shop:order_create" %}"  class="ui  labeled submit icon  button  small" type="submit"> 
+               Продолжить <i class="arrow right icon  blue align right"></i></a>
+                
+            {% endif %}
+              </div> 
+            </td>
+        </tr>
+</table> 
+
+    <div class="ui tablet computer only three bottom mini attached steps " >
+        {% block steps_fot %}   
+          {% include "shop/cart/block.html"  %}  
+        {% endblock steps_fot %}  
+    </div>
+
+   
+    
+<!-----------------end segment    -->
+</div> 
+  <div class="computer only  ui hidden  divider" ></div>  
+ <!-------------------promo-------------------------->
+  <div class="computer only column sixteen wide">    
+ {% include "promo/970x250.html"  %}  
+  
+</div>
+<div class="tablet only ui equal width row"> 
+{% include "promo/728x90.html"  %}
+ </div> 
+<div class="sixteen wide  mobile only column"> 
+ {% include "promo/320x100.html"  %} 
+
+</div>     
+<!---------------------------------------------> 
+
+
+{% endblock %}
+
+ 
+{% block footer_12 %}
+{% include "shop/__footer_menu_category.html"  %}
+{% endblock footer_12 %}  

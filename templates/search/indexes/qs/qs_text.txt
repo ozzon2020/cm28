@@ -1,0 +1,6 @@
+{{ object.theme }}
+{{ object.var.name }}
+{{ object.theme }}
+{{ object.main }}
+{{ object.reply }}
+{{ object.name }}

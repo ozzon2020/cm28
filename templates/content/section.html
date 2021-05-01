@@ -1,0 +1,79 @@
+{% extends "base_general.html" %}
+{% block title %}{{ section.title }} {% endblock %}
+
+{% block meta_description %}{{ section.meta_description }}{% endblock %}
+{% block meta_keywords %}{{ section.meta_keywords }}{% endblock %}
+{% block og_title %}{{ section.title }} на сайте preparation.su{% endblock %}
+{% block og_description %} {{ section.meta_description }}{% endblock %}
+{% block og_url %}{{ section.get_absolute_url }}{% endblock %}
+{% block item_name %}{{ section.name }}{% endblock %}
+{% block item_description %}{{ section.meta_description }} на  preparation.su{% endblock %}
+{% block canonical %}{{ section.get_absolute_url }}{% endblock%}
+
+
+ {% block sloganheader %} 
+ {{ block.super }}
+
+
+{% endblock  %}
+
+{% block breadcrumbs %}   
+{{ block.super }}
+ <span class="divider">></span>   
+ <a href="{{ section.ch.get_absolute_url }} " >
+        {{ section.ch.name }} 
+   </a>
+ <span class="divider">></span> {{ section.name }}
+{% endblock breadcrumbs %}
+
+
+ {% block four_content_main %}   
+  
+  {{ block.super }}
+   {% include "content/_menu_accordion.html"  %}
+  {% include "content/_menu_pages.html"  %}
+  <!-------------------promo-------------------------->
+  {% include "promo/240x400.html"  %}  
+  {% include "promo/240x400.html"  %}
+  <!-------------------promo-------------------------->
+ {% endblock four_content_main %} 
+ 
+ {% block twelve_content_main %}
+      {{ block.super }}
+      
+        <div class="ui container">
+    <span class="topsection">  
+   {{section.top_page|safe}}
+    </span>       
+    <span class="section_main">  
+     {{tags}}
+        {{ section.main |safe}}
+    </span>   
+    
+    {% include "content/_mobile_menu_pages.html"  %}
+    
+       {% include "content/_tags_views.html"  %} 
+       
+       </div>
+<!-------------------promo-------------------------->
+  <div class="computer only column sixteen wide">    
+ {% include "promo/970x250.html"  %}  
+  
+</div>
+<div class="tablet only ui equal width row"> 
+{% include "promo/728x90.html"  %}
+ </div> 
+<div class="sixteen wide mobile only column"> 
+ {% include "promo/320x100.html"  %} 
+ {% include "promo/320x100.html"  %}  
+</div>     
+<!--------------------------------------------->
+ {% endblock twelve_content_main %}
+
+{% block footer_12 %}
+ {% include "content/__footer_menu_category.html"  %}
+{% endblock footer_12 %}  
+
+ 
+ {% block domready %}
+ {% endblock %}

@@ -1,0 +1,66 @@
+<div class="ui computer only container padded" >   
+<div class="ui top fixed borderless fluid  menu small">
+             
+<div class="ui container ">
+          
+          <div class="brand item">
+                           <a href="/"> <img class="ui image spaced tiny" src="/static/images/logo_1.gif">
+                            <!--<span class="ui header sub blue ">Preparation.su</span>-->
+                            </a>
+          </div>
+
+          <a href="/" class="item {% if index_item %} active {%endif%}" ><i class="home icon "></i></a> 
+ 
+      
+        {% with total_items=cart|length %}
+       <div class="item {% if orders_item %} active {%endif%}">
+       {% if cart|length > 0 %}
+       
+       <a  href="{% url "shop:cart_detail" %}">
+       <div class=" item"><i class="cart icon "></i>
+        <span class="floating ui tiny circular blue label inverted"> 
+           {{ total_items }}
+        </span>
+        </div>
+       {% else %}
+       <a  href="{% url "shop:razdel-list" %}"><i class="cart icon"></i>
+       {% endif %}
+       </a>
+       </div>
+     {% endwith %}  
+           
+           
+           
+          <a class="item {% if shop_item %} active {%endif%}" href="{% url "shop:razdel-list" %}">Препараты</a>
+          <div class="ui dropdown item ">
+            Статьи <i class="dropdown icon"></i>
+            <div class="menu">
+                  {% for d_pagelink in desctop_menu_page %}
+                      {% for linkpage in d_pagelink.chrazdel.all %}
+                         {% if linkpage.active and forloop.counter < 2 %}
+                         <a href="{{linkpage.get_absolute_url}}" class="item">{{d_pagelink.name}} </a>
+                         {% endif %}
+                      {% endfor %}  
+                  {% endfor %} 
+            </div>
+          </div>
+          <div class="right menu">
+    
+            <a href="{% url "qs:questions-detail" %}" class="item {% if qs_item %} active {%endif%}">Вопросы / Ответы</a>
+            <div class="item">
+                  <form method="get" action="/search/result/" id="form_id">
+                     <!--<div  class="item">-->
+                      
+                    
+                    <div class="ui icon input" >
+    <input class="prompt" type="text" name="q" placeholder="Поиск...">
+  <i class="circular search link icon" id='button_id'></i>
+  </div>
+                  </form>
+            </div>
+            
+          </div>
+      
+</div>
+</div>    
+</div>

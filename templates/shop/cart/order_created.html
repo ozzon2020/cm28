@@ -1,0 +1,113 @@
+{% extends "base_general.html" %}
+
+{% block title %}Оформление заказа , доставка и оплата на сайте preparation.su {% endblock %}
+
+{% block meta_description %}Оформление заказа , доставка и оплата на сайте preparation.su {% endblock %}
+{% block meta_keywords %}препараты, для секса, купить препараты, купить онлайн{% endblock %}
+{% block og_title %}Оформление заказа , доставка и оплата на сайте preparation.su {% endblock %}
+{% block og_description %}Оформление заказа , доставка и оплата на сайте preparation.su {% endblock %}
+{% block og_url %}{% url "shop:order_create" %}{% endblock %}
+{% block item_name %}Корзина покупок на сайте preparation.su{% endblock %}
+{% block item_description %}Оформление заказа , доставка и оплата на сайте preparation.su {% endblock %}
+{% block canonical %}{% url "shop:order_create" %}{% endblock%}
+
+
+
+{% block breadcrumbs %}
+Оформление заказа 
+<span class="divider">></span>  <a href="{% url "shop:razdel-list" %}">Каталог</a>
+<span class="divider">></span> <a href="{% url "shop:cart_detail" %}">Корзина</a>
+<span class="divider">></span> Данные для доставки
+{% endblock %}
+
+
+
+{% block content_main %}
+
+<div class="grid container stackable ">
+<div class="tablet only  ui hidden  divider"></div>
+        <div class="ui three top mini attached steps tablet computer only">
+           {% include "shop/cart/block.html"  %}  
+         </div>
+
+            <div class="tablet computer only ui  four wide  column mobile only sixteen wide column wide ">
+                       
+                          <h4 class="ui dividing header">Заказ</h4>
+                          <ol class="ui list small">
+                        
+                         {% for item in cart %}
+                                <li value="-">
+                                  {{ item.quantity }}x {{ item.product.name }}
+                                  <span id="totalprice">{{ item.total_price }} <i class="ruble sign icon  small"></i></li></span>
+                                </li>
+                              {% endfor %}
+                              </ol>
+                         
+                              <div id="info"></div>
+                              
+                              <h4 >Сумма <span id="sum" >{{ cart.get_total_price }}</span> <i class="ruble sign icon  small"></i></h4>
+             <div class="ui clearing divider " ></div>
+          </div>
+            <div class="tablet computer only ui  twelve wide  column  mobile only sixteen wide column wide " >
+         
+              {% include "shop/cart/__order_data_client.html" %} 
+          
+            </div>
+
+
+
+<div class="tablet computer only ui hidden  divider"></div>
+      <div class="ui three top mini attached steps tablet computer only">
+           {% include "shop/cart/block.html"  %}  
+        </div>
+   
+    </div> 
+        
+  </div>
+
+ <!-------------------promo-------------------------->
+  <div class="computer only column sixteen wide">    
+ {% include "promo/970x250.html"  %}  
+  
+</div>
+<div class="tablet only ui equal width row"> 
+{% include "promo/728x90.html"  %}
+ </div> 
+<div class="sixteen wide  mobile only column"> 
+ {% include "promo/320x100.html"  %} 
+
+</div>     
+<!---------------------------------------------> 
+{% endblock %}
+{% block footer_12 %}
+{% include "shop/__footer_menu_category.html"  %}
+{% endblock footer_12 %}  
+{% block domready %}
+
+ $("#cash, #sber, #pochta").change(function () {
+
+    $.post('{% url "shop:payment" %}',
+      {
+        id: $(this).data('id'),
+        pr: $('#postId').data('pr')
+
+      },
+      function(data){
+
+        if (data['status'] == 'ok')
+        {
+
+          document.getElementById("id_summa").value = data['summa'];
+         $('#info').html(' <h4 class="ui dividing header">Доставка и оплата</h4>'+data['name']+' - '+data['pay']+' <i class="ruble sign icon  small"></i>');
+         $('#sum').text(''+data['summa']+',00')
+          
+
+
+        }
+
+        
+      }
+    );
+  });  
+
+{% endblock %}

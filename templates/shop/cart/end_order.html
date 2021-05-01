@@ -1,0 +1,68 @@
+{% extends "base_general.html" %}
+
+{% block title %}Ваш заказ номер {{ order.id }} оформлен на сайте preparation.su {% endblock %}
+
+{% block meta_description %}Ваш заказ номер {{ order.id }} оформлен на сайте preparation.su{% endblock %}
+{% block meta_keywords %}препараты, для секса, купить препараты, купить онлайн{% endblock %}
+{% block og_title %}Ваш заказ номер {{ order.id }} оформлен на сайте preparation.su{% endblock %}
+{% block og_description %}Ваш заказ номер {{ order.id }}оформлен на сайте preparation.su {% endblock %}
+{% block og_url %}{% url "shop:order_create" %}{% endblock %}
+{% block item_name %}Ваш заказ номер {{ order.id }} оформлен на сайте preparation.su{% endblock %}
+{% block item_description %}Ваш заказ номер {{ order.id }}оформлен на сайте preparation.su {% endblock %}
+{% block canonical %}{% url "shop:order_create" %}{% endblock%}
+
+
+
+{% block breadcrumbs %}   
+{{ block.super }}
+
+ <span class="divider">></span> Заказ оформлен
+{% endblock breadcrumbs %}
+ 
+{% block content_main %}
+
+<div class="ui grid container stackable ">
+
+            <div class="tablet only  ui hidden  divider"></div>
+            <div class="ui three top mini attached steps">
+              {% include "shop/cart/block.html"  %}  
+            </div>
+
+             <div class=" sixteen wide column wide ">
+
+            <h3>Ваш заказ оформлен</h3>
+            <p>Номер Вашего заказа <strong>{{ order.id }}</strong></p>
+
+            <p>Сумма к оплате выбранным способом,отправленна Вам на электронный адрес </p>
+          
+            <h5>Благодарим, что выбрали нас!</h5>
+
+            </div>
+            
+            <div class="ui three bottom mini attached steps tablet computer only">   
+              {% include "shop/cart/block.html"  %}  
+            </div>
+
+<div class="ui hidden  divider"></div>
+      
+ <!-------------------promo-------------------------->
+  <div class="computer only column sixteen wide">    
+ {% include "promo/970x250.html"  %}  
+  
+</div>
+<div class="tablet only ui equal width row"> 
+{% include "promo/728x90.html"  %}
+ </div> 
+<div class="sixteen wide  mobile only column"> 
+ {% include "promo/320x100.html"  %} 
+
+</div>     
+<!---------------------------------------------> 
+</div>    
+{% endblock %}
+
+{% block footer_12 %}
+{% include "shop/__footer_menu_category.html"  %}
+{% endblock footer_12 %}  
+{% block butpanel %} 
+{% endblock butpanel %} 

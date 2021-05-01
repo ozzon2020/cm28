@@ -1,0 +1,76 @@
+         <div class="ui  title active">Описание {{ product.name }}</div> 
+         <div class="ui divider"></div>  
+<div class="ui divided items">
+{% if product.about %}
+  <div class="item">
+  
+    <div class="content">
+      <div class="ui sub header">Применение</div>
+      
+      <div class="description">
+       {{ product.about|safe }}
+      </div>
+    </div>
+  </div>
+  {%endif%}
+  {% if product.sostav %}
+  <div class="item">
+
+    <div class="content">
+      <div class="ui sub header">Состав</div>
+      
+      <div class="description">
+        <p>{{ product.sostav|safe }}</p>
+      </div>
+    </div>
+  </div>
+  {%endif%}
+  {% if product.kurs %}
+  <div class="item">
+
+    <div class="content">
+      <div class="ui sub header">Курс приема</div>
+     
+      <div class="description">
+        <p>{{ product.kurs}}</p>
+      </div>
+    </div>
+  </div>
+  {%endif%}
+  {% if product.priem %}
+    <div class="item">
+  
+    <div class="content">
+      <div class="ui sub header">Как принимать</div>
+      
+      <div class="description">
+       <p>{{ product.priem}}</p>
+      </div>
+    </div>
+  </div>
+   {%endif%}
+     {% if product.izgotovitel %}
+    <div class="item">
+  
+    <div class="content">
+      <div class="ui sub header">Производитель</div>
+      
+      <div class="description">
+       <p>{{ product.izgotovitel|safe}}</p>
+      </div>
+    </div>
+  </div>
+  {%endif%}
+  {% if product.sertifikat %}
+    <div class="item">
+  
+    <div class="content">
+      <div class="ui sub header">Сертификат</div>
+      
+      <div class="description">
+       <p>{{ product.sertifikat}}</p>
+      </div>
+    </div>
+  </div>
+  {%endif%}
+</div>

@@ -1,0 +1,59 @@
+
+{% extends "base_general.html" %}
+{% block meta_description %}Ошибка 404 (Page not found). Такой страницы не существует{% endblock %}
+{% block meta_keywords %}Ошибка 404 (Page not found). Такой страницы не существует{% endblock %}
+{% block title %}Ошибка 404 (Page not found). Такой страницы не существует{% endblock %}
+{% block og_title %}Ошибка 404 (Page not found). Такой страницы не существует{% endblock %}
+
+
+
+{% block breadcrumbs %}    
+{{ block.super }} 
+
+<span class="divider">/</span> 404
+{% endblock %}
+
+
+ 
+  {% block content_main %}   
+   
+ 
+
+<div class="ui grid container centered">
+<div class="row ">
+<div class="ui vertical stripe segment">
+                <div class="ui text container centered" style="height:300px;">
+
+
+<div class="ui huge horizontal statistic">
+  <div class="value">
+    404 
+  </div>
+  
+  <div class="label">Page not found </div>
+</div>
+                   
+                    <h4 class="ui horizontal header divider">
+                        <a href="#">Такой страницы не существует</a>
+                    </h4>
+                  
+                    <p>К сожалению такой страницы не существует. Попробуйте воспользоваться навигацией сайта.</p>
+
+                </div>
+</div>
+</div>
+</div>
+  {% endblock %} 
+
+
+
+      
+    {% block butpanel %}   
+
+    {% endblock %}    
+    
+    {% block foot_two %}  
+
+    {% endblock %}       
+{% block domready %}       
+{% endblock %}

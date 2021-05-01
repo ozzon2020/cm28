@@ -1,0 +1,85 @@
+          
+                        <div class="sixteen wide column" >
+                             
+                              
+                                    <div class="ui  sub header blue"> Результаты поиска 
+                                     <span class="ui label small">{{page.paginator.count}}</span>
+                                    </div>
+                            
+                         
+                         
+                            <form method="get" action="/search/result/" class="ui form">
+                               
+                                 <!----------mobile-->
+                                    <!--<div class="ui mobile only left icon input inline fields">-->
+                                    <!--<i class="search icon"></i><input type="text" name="q" placeholder="Поиск...">-->
+                                    <!--</div>-->
+                                 <!------------computer-->
+                                <div class=" inline fields">
+                        
+                                    <div class="twelve wide field">
+                                 
+                                   <input type="text" name="q" placeholder="Поиск...">
+                                   </div>
+                                    <div class="four wide field">
+                                 
+                                   <button class="fluid ui button " type="submit"><i class="search icon"></i>Поиск
+                                 
+                                   </div>
+                                 </div>    
+                            </form>
+                        </div>
+                        <!--Search-->
+{% if query %}
+
+
+    {% for result in page.object_list %}  
+            {% if result.content_type == "content.section" %}
+              {% include "search/include/section.html" %}
+             {% endif %}
+            
+             {% if result.content_type == "shop.product" %}
+              {% include "search/include/product.html" %}
+             {% endif %}
+             {% if result.content_type == "shop.review" %}
+              {% include "search/include/review.html" %}
+             {% endif %}
+             
+            {% if result.content_type == "qs.qs" %}
+            {% include "search/include/qs.html" %}
+            {% endif %}
+             
+    {% empty %}
+     <div class="ui container">
+        <h3 class="ui sub header blue"> Не найдено ничего </h3>  
+        </div>
+
+  {% endfor %}
+
+        
+           {% if page.has_previous or page.has_next %}
+ <div class="ui container ">
+                <div class="ui buttons">
+                           {% if page.has_previous %}
+                           <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}" class="ui left blue basic labeled icon button active"> <i class="angle  left icon blue"></i>предыдущая </a>
+                           {% else%}
+                            <button class="ui left labeled icon button disabled"><i class="angle  left icon"></i>предыдущая </button>
+                          {% endif %}
+                         
+                         {% if page.has_next %}
+                        <a href="?q={{ query }}&amp;page={{ page.next_page_number }}" class="ui right labeled icon blue basic button active">следующая <i class="angle right icon blue"></i></a>
+                         {% else%}
+                         <button class="ui right labeled icon button disabled">следующая<i class="angle right icon"></i> </button>
+                        {% endif %}
+               </div>
+   </div>             
+            {% endif %}
+        
+{% endif %}
+
+
+
+
+<!--final-->
+
+</div>

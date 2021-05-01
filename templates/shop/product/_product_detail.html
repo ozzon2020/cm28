@@ -1,0 +1,45 @@
+ {% load shop_tags %}   
+
+<!--class="ui stackable menu"-->
+ <div class="ui top attached tabular  menu ">
+  <a class="item {% if page == None %} active {%endif%}" data-tab="product">
+  <span class="computer tablet only">Продукт</span>
+  <span class="mobile only"><i class="shopping bag  blue icon large"></i></span>
+  </a>
+  <a class="center item " data-tab="about">
+  <span class="computer tablet only">Описание</span>
+  <span class="mobile only"><i class="info  blue icon large"></i></span>
+  </a>
+  <!--<div class="right menu">-->
+  <a class="item align right {% if page %} active {%endif%}" data-tab="comment">
+ 
+   <span class="computer tablet only">Отзывы</span>
+  <span class="mobile only"><i class="comment  outline  blue icon large"></i></span>
+  <span class="ui blue basic label">{% total_review product.pk %}</span>
+  </a>
+  <!--</div>-->
+</div>
+<div class="ui bottom attached tab segment {% if page == None %} active {%endif%}" data-tab="product">
+{% include "shop/product/__view_product.html"  %} 
+</div>
+<div class="ui bottom attached tab segment " data-tab="about">
+{% include "shop/product/__view_about_product.html"  %}
+</div>
+<div class="ui bottom attached tab segment {% if page %} active {%endif%}" data-tab="comment">
+{% include "shop/product/__view_comment.html"  %}
+</div>
+
+
+{%if sectionsprod %}
+<div class="ui horizontal link list small">
+<div class="ui sub header tiny item">Статьи:</div>
+{% for secpr in sectionsprod %}
+/
+  <a  href="{{ secpr.get_absolute_url }}">
+    {{secpr.name}}
+  </a> 
+{% endfor %} 
+
+</div>
+
+{%endif%}

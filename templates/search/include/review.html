@@ -1,0 +1,19 @@
+{%load highlight %}
+<div class="ui container">
+ <a  href="{{result.object.product.get_absolute_url }}?page=1" rel="nofollow" data-tooltip="Отзыв о препарате"  data-inverted="">
+<i class="comment icon large blue "></i></a> 
+
+<a  href="{{result.object.product.get_absolute_url }}?page=1" rel="nofollow" >
+<span class="ui sub header blue">"{{ result.object.product.name }}"  </span>
+</a> 
+<span class="ui basic small label"> {{ result.object.product.name }} / {{ result.object.product.category.name }}  </span>
+    <div class="content">               
+        <div class="text">
+        <a  href="{{result.object.product.get_absolute_url }}?page=1" rel="nofollow" >             
+        {% highlight result.object.body with query max_length 100 %}
+        </a>
+        </div>
+    </div>
+<div class="ui divider"></div>
+</div>
+

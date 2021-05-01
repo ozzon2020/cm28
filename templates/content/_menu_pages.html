@@ -1,0 +1,36 @@
+
+<div class="ui divided items blue tiny">
+{% for page in section.pages.all %}
+
+    {% if page.active %}
+     <div class="item " >
+     <a href="{{ page.get_absolute_url }}">
+        <div class="gadget">
+        {% if page.image %}
+        <img src="/media/{{page.image}}" alt="{{page.name}}" >
+        {% else %}
+        <img src="/static/images/small/default.jpg" >
+        {%endif%}
+        </div>
+    </a>
+    <div class="content">
+        <div class="meta">
+         <a href="{{ page.get_absolute_url }}">
+        {{page.name}}
+        </a>
+        </div>
+
+        <div class="description">
+          <p>{{page.meta_description|truncatewords:8}}
+           <a href="{{ page.get_absolute_url }}" class="ui small right floated "><i class="angle double right icon"></i></a>  
+          </p>
+       
+        </div>
+      
+     
+     </div>
+      
+     </div> 
+    {% endif %}  
+{% endfor %}  
+  </div>

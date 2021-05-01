@@ -1,0 +1,75 @@
+{% extends "base_general.html" %}
+{% load recaptcha3 %}
+
+        {% block title %}Вопрос : {{qs.theme}} 28cm.ru{% endblock %}
+        {% block meta_description %}Вопрос / Ответ на {{qs.theme}} 28cm.ru{% endblock %}
+        {% block meta_keywords %}Вопрос / Ответ на  28cm.ru{% endblock %}
+        {% block og_title %}Вопрос : {{qs.theme}} 28cm.ru{% endblock %}
+        {% block og_description %}Вопрос / Ответ на {{qs.theme}} {% endblock %}  
+        {% block og_url %}{% url "qs:qs-detail" qs.pk %}{% endblock %}
+        {% block item_name %}Вопрос / Ответ на {{qs.theme}} 28cm.ru{% endblock %}
+        {% block item_description %}Вопрос / Ответ на {{qs.theme}} 28cm.ru{% endblock %}
+        {% block canonical %}{% url "qs:qs-detail" qs.pk %}{% endblock %}
+
+{% block recaptcha %}
+{% recaptcha_init %}
+{% recaptcha_ready action_name=''  %}
+{% endblock %}
+
+
+
+{% with qs.theme as sloganheader1 %}
+   <h1>{{sloganheader1}}</h1>
+{% endwith %}
+
+{% block breadcrumbs %}   
+{{ block.super }}
+
+ <span class="divider">></span> 
+ <a href="{% url "qs:questions-detail"%}{%if page %}?page={{page}}{%endif%}">Вопрос / Ответ </a><span class="divider">></span> {{qs.theme}}
+{% endblock breadcrumbs %}
+
+
+ {% block four_content_main %}   
+  
+  {{ block.super }}
+
+   <!-------------------promo-------------------------->
+  {% include "promo/240x400.html"  %}  
+  {% include "promo/240x400.html"  %}
+  <!-------------------promo-------------------------->
+      
+ {% endblock four_content_main %} 
+ 
+ {% block twelve_content_main %}
+      {{ block.super }}
+<div class="ui equal width stackable internally grid">
+    
+        {% include "qs/_qs-detail.html"  %}  
+
+</div>
+{% block paginated %}      
+{% endblock paginated %}  
+<!-------------------promo-------------------------->
+  <div class="computer only column sixteen wide">    
+ {% include "promo/970x250.html"  %}  
+  
+</div>
+<div class="tablet only ui equal width row"> 
+{% include "promo/728x90.html"  %}
+ </div> 
+<div class="sixteen wide  mobile only column"> 
+ {% include "promo/320x100.html"  %} 
+ {% include "promo/320x100.html"  %}  
+</div>     
+<!--------------------------------------------->
+ {% endblock twelve_content_main %}
+
+{% block footer_12 %}
+{% include "shop/__footer_menu_category.html"  %}
+{% endblock footer_12 %}    
+
+
+ 
+ {% block domready %}
+ {% endblock %}

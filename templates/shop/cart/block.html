@@ -1,0 +1,24 @@
+  <div class="{% if step == 1 %}active{% else %} disabled{% endif %} step">
+    <i class="shopping cart icon {% if step == 1 %}yellow{% endif %}"></i>
+    <div class="content">
+      <div class="title"><span class="ui sub header {% if step == 1 %}yellow{% endif %}">Корзина заказа</span></div>
+      <div class="description">Выберите количество товара</div>
+    </div>
+  </div>
+  
+    <div class="{% if step == 2 %}active{% else %} disabled{% endif %}  step" >
+    <i class="truck icon {% if step == 2 %}yellow{% endif %}"></i>
+    <div class="content">
+      <div class="title  "><span class="ui sub header {% if step == 2 %}yellow{% endif %}">Доставка и оплата</span></div>
+      <div class="description">Выберите тип доставки</div>
+    </div>
+  </div>
+  
+  <div class="{% if step == 3 %}active{% else %} disabled{% endif %} step">
+    <i class="info icon {% if step == 3 %}yellow{% endif %}"></i>
+    <div class="content">
+      <div class="title"><span class="ui sub header {% if step == 3 %}yellow{% endif %}">Завершение оформления</span></div>
+      <div class="description">Получение номера заказа</div>
+    </div>
+  </div>
+  

@@ -1,0 +1,73 @@
+{% extends "base_general.html" %}
+{% load recaptcha3 %}
+{% load static %}
+{% load shop_tags %}
+
+
+{% block title %}{{ product.title}}{% endblock %}
+{% block meta_description %}{{product.meta_description}}{% endblock %}
+{% block meta_keywords %}{{product.name}}{% endblock %}
+{% block og_title %}{{product.title}}{% endblock %}
+{% block og_description %}{{product.meta_description}}{% endblock %}
+{% block og_url %}{{ product.get_absolute_url }}{% endblock %}
+{% block item_name %}{{product.name}}{% endblock %}
+{% block item_description %}{{product.meta_description}}{% endblock %}
+{% block canonical %}{{ product.get_absolute_url }}{% endblock%}
+
+{% block recaptcha %}
+{% recaptcha_init %}
+{% recaptcha_ready action_name='?'  %}
+{% endblock %}
+
+
+{% block breadcrumbs %}   
+{{ block.super }}
+
+ <span class="divider">></span> <a href="{% url "shop:razdel-list" %}">Каталог</a>
+  <span class="divider">></span> <a href="{% url "shop:category-list"  product.category.slug %}">{{product.category.name}}</a>
+  <span class="divider">></span> {{product.name}}
+{% endblock breadcrumbs %}
+
+<!-----------------main------------------------>
+{% block four_content_main %}   
+  
+  {{ block.super }}
+  
+  {% include "shop/_menu_accordion.html"  %}
+
+<!-------------------promo-------------------------->
+  {% include "promo/240x400.html"  %}  
+
+  <!-------------------promo-------------------------->     
+ {% endblock four_content_main %} 
+ 
+ {% block twelve_content_main %}
+      {{ block.super }}
+    <div class="ui container">
+        {% include "shop/product/_product_detail.html" %} 
+    </div>
+ <!-------------------promo-------------------------->
+  <div class="computer only column sixteen wide">    
+ {% include "promo/970x250.html"  %}  
+
+</div>
+<div class="tablet only ui equal width row"> 
+{% include "promo/728x90.html"  %}
+ </div> 
+<div class="sixteen wide  mobile only column"> 
+ {% include "promo/320x100.html"  %} 
+
+</div>     
+<!--------------------------------------------->         
+ {% endblock twelve_content_main %}
+<!-----------------end main------------------------>
+
+ 
+    {% block footer_12 %}
+     {% include "shop/__footer_menu_category.html"  %}
+    {% endblock footer_12 %}  
+
+     
+{% block domready %}
+{% endblock %}
+ 

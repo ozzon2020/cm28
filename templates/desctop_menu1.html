@@ -1,0 +1,156 @@
+<!-- Following Menu -->
+
+<div class="ui computer only tiny top fixed hidden menu borderless yellow"> 
+  <div class="ui container yellow">
+  <!------------------------------>
+             <div class="item">
+                           <a href="/">
+                           <!--<img class="ui image spaced tiny" src="/static/images/logo_1.gif">-->
+                            <span class="ui header sub blue ">28cm.ru</span>
+                            </a>
+          </div>
+
+          <a href="/" class="item {% if index_item %} active {%endif%}" ><i class="home icon "></i></a> 
+ 
+      
+        {% with total_items=cart|length %}
+       <div class="item {% if orders_item %} active {%endif%}">
+       {% if cart|length > 0 %}
+       
+       <a  href="{% url "shop:cart_detail" %}">
+       <div class=" item"><i class="cart icon "></i>
+        <span class="floating ui tiny circular red label inverted"> 
+           {{ total_items }}
+        </span>
+        </div>
+       {% else %}
+       <a  href="{% url "shop:razdel-list" %}"><i class="cart icon"></i>
+       {% endif %}
+       </a>
+       </div>
+     {% endwith %}  
+           
+           
+           
+          <a class="item {% if shop_item %} active {%endif%}" href="{% url "shop:razdel-list" %}">Препараты</a>
+          <div class="ui dropdown item ">
+            Статьи <i class="dropdown icon"></i>
+            <div class="menu">
+                  {% for d_pagelink in desctop_menu_page %}
+                      {% for linkpage in d_pagelink.chrazdel.all %}
+                         {% if linkpage.active and forloop.counter < 2 %}
+                         <a href="{{linkpage.get_absolute_url}}" class="item">{{d_pagelink.name}} </a>
+                         {% endif %}
+                      {% endfor %}  
+                  {% endfor %} 
+            </div>
+          </div>
+          <div class="right menu">
+    
+            <a href="{% url "qs:questions-detail" %}" class="item {% if qs_item %} active {%endif%}">Вопросы / Ответы</a>
+            <div class="item">
+                  <form method="get" action="/search/result/" id="form_id">
+                 
+                      
+                    
+                    <div class="ui icon input" >
+    <input class="prompt" type="text" name="q" placeholder="Поиск...">
+  <i class="circular search link icon" id='button_id'></i>
+  </div>
+                  </form>
+            </div>
+            
+          </div>
+          <!------------------------->
+  </div>
+</div>
+
+<!-- Sidebar Menu -->
+<!--<div class="ui vertical  sidebar menu">-->
+  <!--<a class="active item">Home</a>-->
+  <!--<a class="item">Work</a>-->
+  <!--<a class="item">Company</a>-->
+  <!--<a class="item">Careers</a>-->
+  <!--<a class="item">Login</a>-->
+  <!--<a class="item">Signup</a>-->
+<!--</div>-->
+
+
+<!-- Page Contents -->
+<div class=" pusher">
+  <div class="computer only  ui inverted vertical masthead_decktop center aligned segment blue">
+<!------------------------------------>
+    <div class="ui container">
+      <div class="ui small secondary  menu">
+        <div class=" item">
+                           <!--<a href="/"> <img class="ui image spaced tiny" src="/static/images/logosite.gif">-->
+                            <span class="ui header sub red ">Preparation.su</span>
+                            </a>
+          </div>
+
+          <a href="/" class="item {% if index_item %} active {%endif%}" ><i class="home icon "></i></a> 
+ 
+      
+        {% with total_items=cart|length %}
+       <div class="item {% if orders_item %} active {%endif%}">
+       {% if cart|length > 0 %}
+       
+       <a  href="{% url "shop:cart_detail" %}">
+       <div class=" item"><i class="cart icon "></i>
+        <span class="floating ui tiny circular red label inverted"> 
+           {{ total_items }}
+        </span>
+        </div>
+       {% else %}
+       <a  href="{% url "shop:razdel-list" %}"><i class="cart icon"></i>
+       {% endif %}
+       </a>
+       </div>
+     {% endwith %}  
+           
+           
+           
+          <a class="item {% if shop_item %} active {%endif%}" href="{% url "shop:razdel-list" %}">Препараты</a>
+          <div class="ui dropdown item ">
+            Статьи <i class="dropdown icon"></i>
+            <div class="menu">
+                  {% for d_pagelink in desctop_menu_page %}
+                      {% for linkpage in d_pagelink.chrazdel.all %}
+                         {% if linkpage.active and forloop.counter < 2 %}
+                         <a href="{{linkpage.get_absolute_url}}" class="item">{{d_pagelink.name}} </a>
+                         {% endif %}
+                      {% endfor %}  
+                  {% endfor %} 
+            </div>
+          </div>
+          <div class="right menu">
+    
+            <a href="{% url "qs:questions-detail" %}" class="item {% if qs_item %} active {%endif%}">Вопросы / Ответы</a>
+            <div class="item">
+                  <form method="get" action="/search/result/" id="form_id">
+                     <!--<div  class="item">-->
+                      
+                    
+                    <div class="ui icon input" >
+    <input class="prompt" type="text" name="q" placeholder="Поиск...">
+  <i class="circular search link icon" id='button_id'></i>
+  </div>
+                  </form>
+            </div>
+            
+          </div>
+          <!----------------------------------->
+      </div>
+    </div>
+
+    <div class="ui text container">
+      <h1 class="ui inverted header">
+        Imagine-a-Company
+      </h1>
+      <h2>Do whatever you want when you want to.</h2>
+      <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>
+    </div>
+
+  <!--</div>-->
+  
+  </div>  

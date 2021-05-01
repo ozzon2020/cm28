@@ -1,0 +1,54 @@
+
+                  <div class="sixteen wide mobile eleven wide tablet sixteen wide computer column  " >
+
+               
+                   {% block pagination %}
+                   <div class="ui pagination computer tablet only large mobile only tiny text borderless menu inverted">
+                                             
+                                {% if page_obj.has_previous %}
+                           
+              
+                                
+                                <div class="item">
+                                    <div class="content">
+                                        <a class="ui blue " href="{{ request.path }}?page={{ page_obj.previous_page_number }}">
+                                        <i class="icon arrow left "></i></a>
+                                    </div>
+                                </div>
+                                
+                                     
+                                          
+                                {% endif %}         
+                           
+                           
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                         <div class="item "><div class="content"><span class="ui  basic label grey  inverted ">{{ num }}</span></div></div>
+                         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                         <div class="item">
+                            <div class="content">
+                            <a class="ui blue basic label" href="{{ request.path }}?page={{ num }}">{{ num }}</a>
+                            </div>
+                         </div>
+                       
+                         {% endif %}                                     
+                    {% endfor %}
+                           
+                             {% if page_obj.has_next %}
+                            
+                            <div class="item">
+                                <div class="content">
+                                <a class="ui blue " href="{{ request.path }}?page={{ page_obj.next_page_number }}">
+                                <i class="icon arrow right "></i></a>
+                                </div>
+                            </div>
+                                
+         
+                               
+                             
+                             {% endif %}
+                                </div>              
+                    {% endblock %}                
+
+                    </div>
+                    

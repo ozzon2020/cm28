@@ -1,0 +1,70 @@
+{% extends "base_general.html" %}
+{% block title %}Каталог препаратов: {% for objmy in menu_product %} {{objmy.name}} {%endfor%} на сайте preparation.su
+{% endblock %}
+
+{% block meta_description %}Категории {% for objmy in menu_product %} {{objmy.name}} {%endfor%}{% endblock %}
+{% block meta_keywords %}{{ razdel.meta_keywords }}{% endblock %}
+{% block og_title %}Каталог препаратов: {% for objmy in menu_product %} {{objmy.name}} {%endfor%} на сайте preparation.su{% endblock %}
+{% block og_description %} Каталог препаратов: {% for objmy in menu_product %} {{objmy.name}} {%endfor%} на сайте preparation.su{% endblock %}
+{% block og_url %}{% url "shop:razdel-list" %}{% endblock %}
+{% block item_name %}Каталог препаратов на сайте preparation.su{% endblock %}
+{% block item_description %}Каталог препаратов: {% for objmy in menu_product %} {{objmy.name}} {%endfor%} на сайте preparation.su {% endblock %}
+{% block canonical %}{% url "shop:razdel-list" %}{% endblock%}
+
+{% block breadcrumbs %}   
+{{ block.super }}
+
+ <span class="divider">></span> Каталог
+{% endblock breadcrumbs %}
+
+
+ {% block four_content_main %}   
+  
+  {{ block.super }}
+  {% include "shop/_menu_accordion.html"  %}
+   <div class="ui hidden divider"></div>
+<!-----------------main------------------------>      
+ {% endblock four_content_main %} 
+ 
+ {% block twelve_content_main %}
+      {{ block.super }}
+      
+     <h3 class="tablet computer only ui sub header blue"> Категории </h3>  
+    <div class="ui grid container">
+
+         <div class="mobile only ui special  cards ">
+             {% include "shop/_razdel.html"  %}  
+        </div>
+                        
+        <div class="tablet computer only ui special three  cards ">
+             {% include "shop/_razdel.html"  %}  
+        </div>
+        
+ 
+        
+        
+       {% include "content/_tags_views.html"  %}  
+       </div>
+<!-------------------promo-------------------------->
+  <div class="computer only column sixteen wide">    
+ {% include "promo/970x250.html"  %}  
+  
+</div>
+<div class="tablet only ui equal width row"> 
+{% include "promo/728x90.html"  %}
+ </div> 
+<div class="sixteen wide mobile only column"> 
+ {% include "promo/320x100.html"  %} 
+ {% include "promo/320x100.html"  %}  
+</div>     
+<!--------------------------------------------->      
+ {% endblock twelve_content_main %}
+<!-----------------end main------------------------>
+
+
+{% block footer_12 %}
+{% include "shop/__footer_menu_category.html"  %}
+{% endblock footer_12 %}  
+ 
+ {% block domready %}
+ {% endblock %}

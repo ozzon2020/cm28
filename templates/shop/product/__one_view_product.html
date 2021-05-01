@@ -1,0 +1,57 @@
+ {% load shop_tags %}   
+      <div class="ui fluid card">
+      
+      
+      
+   <!--"ui top aligned tiny image"   -->
+       
+          <div class="content">
+            
+              <div class="ui sub header large">
+              <a href="{{ product.get_absolute_url }}">{{product.name}}</a>
+              </div>
+              
+{% if  product.best %} <a class="ui  ribbon label">{{product.best}}</a>{%endif%}
+{% if  product.sale %} <a class="ui blue ribbon label">{{product.sale}}</a>{%endif%}
+
+              <!--<div class=" ui mini feed"></div>-->
+
+              <div class="ui small feed">
+               {% load thumbnail %}
+              {% thumbnail product.image "150x150" crop="100%"  as im %}
+               <a href="{{ product.get_absolute_url }}" >
+              <img class="ui top aligned left floated spaced tiny image"  src="{{ im.url }}" alt="{{product.name}}">
+              </a>
+              {% endthumbnail %}
+              {{product.title|safe|truncatewords:10}}
+              </div>       
+      </div>
+      <div class="extra content small">
+       {% if product.price%}
+        {{product.price}} <i class="ruble sign icon  small"></i>
+        {%endif%}
+ 
+          <div class="mini right floated">
+           {% if product.available %}
+          <a href="{{ product.get_absolute_url }}" data-tooltip="Заказать {{ product.name}}" data-inverted="" data-position="top left"><i class="cart icon blue"></i> </a>
+          {% elif product.orderlink %}  
+            <a href="{{product.orderlink}}"  data-tooltip="Где купить {{ product.name}}" data-inverted="" data-position="top left"  target="_blank"><i class="linkify icon blue"></i></a>
+          {%else %}  
+           <a  data-tooltip="Отсутствует" data-inverted="" data-position="top left"><i class="minus icon "></i></a>
+          {%endif%}
+          
+           {% total_review product.pk as tr %}
+           {% if tr %}
+           <a href="{{ product.get_absolute_url }}?page=1" data-tooltip="Отзывы о {{ product.name}}" data-inverted="" data-position="top left">
+           <i class="comment alternate icon  blue"></i> </a>{% total_review product.pk %} 
+           {% endif %}
+           <i class="heart icon  
+           {%if product.total_raiting < 2 %} black 
+           {%elif product.total_raiting < 3.5%} grey 
+           {%elif product.total_raiting < 4.1%} pink
+           {%else%} red
+           {%endif%}"></i> {{product.total_raiting}}
+           </div>
+         
+      </div>
+    </div>

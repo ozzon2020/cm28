@@ -1,0 +1,23 @@
+<div class="ui large  fluid styled accordion ui blue"> 
+
+    {% for objmy in menu_product %}
+    <div class="title ui sub header blue fluid {% if objmy.pk == category.var.pk or objmy.pk == product.category.var.pk%} active {% endif %} left" >
+    {{objmy.name}}
+    </div>
+        <div class="{% if objmy.pk == category.var.pk or objmy.pk == product.category.var.pk%} active {% endif %}content"> 
+              <div class="ui link list medium aligned ui blue"> 
+                {% for pr in objmy.medrazdel.all %}
+                {% if pr.active %}
+                    <a href="{% url "shop:category-list" pr.slug %}" 
+                    class="{% if category.slug == pr.slug or product.category.slug == pr.slug %} active {% endif %}  item ">
+                        <i class=" {% if category.slug == pr.slug  or product.category.slug == pr.slug %} blue {% endif %}  caret right icon ">
+                        </i>{{pr.name}}
+                    </a>
+                {% endif %}
+               {% endfor %} 
+            </div>
+        </div>
+    {% endfor %}  
+
+</div>  
+<!--end accordion-->

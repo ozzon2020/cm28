@@ -1,0 +1,112 @@
+
+    <div class="row">  
+
+   <!--style="border:1px solid #f00;"-->
+   <div class="eight wide column" >
+    
+  <div class="ui minimal comments">
+  <div class="ui blue label large">{{qs.var}}</div> 
+  <div class="comment">
+
+
+    {% if qs.theme %}
+   <i class="question circle icon blue"></i>
+    <span class="ui sub header blue ">{{qs.theme}} </span>
+ 
+    {% endif%}
+
+
+    <div class="content">
+       <a href="javascript:sendMail('{{ qs.email }}', '{{ qs.name }} ')" class="author">{{ qs.name }} </a>
+      <div class="metadata">
+        <div class="date"><i class="clock outline icon"></i>{{ qs.created|timesince }}</div>
+
+      </div>
+      
+      <div class="text">
+      
+    {% if qs.main|safe|length > 500 %}
+    
+  <div class="ui accordion">
+   <span class="title my">
+  <span class="transition visible">{{qs.main|striptags|slice:":499"|safe}}...</span>
+ <i class="plus blue icon"></i>раскрыть</span>
+  <span class="content">
+     {{ qs.main|safe}}
+     
+  </span>
+  
+   </div> 
+      {%else%}
+      <span class="content">
+    {{qs.main|safe}}
+      </span>
+    {% endif %}
+     </div>
+     </div>
+  </div>
+</div>
+  
+
+
+  <!--</div>-->
+  </div>
+<div class="eight wide column" >
+  <div class="ui minimal comments">
+  <div class="comment "> 
+  {% if qs.reply %}
+  
+    <div class="content">
+        <img src="/static/images/postdoctor.png" class="ui left floated image" alt="{{qs.var}}">
+        <span class="ui sub header yellow"> Отвечает врач</span>
+      <div class="text">
+      
+    {% if qs.reply|safe|length > 500 %}
+    
+          <div class="ui accordion">
+                <span class="title my">
+                <span class="transition visible">{{qs.reply|striptags|slice:":499"|safe}}...</span>
+                <i class="plus blue icon"></i>читать дальше</span>
+                <span class="content">
+                     {{ qs.reply|safe }}
+                  </span>      
+           </div> 
+      {%else%}
+        {{qs.reply|safe}}
+    {% endif %}
+     </div>
+    
+    </div>
+    {% else %}
+    {% if perms.qs.change_qs %}  
+    <div>
+    <form  method="post" action = "{% url "qs:qs_edit" qs.id %}" class="ui reply form">
+    
+          {% for field in form_reply %}
+         <div class="field">
+            <label>{{ field.label }}</label>
+            {{ field }}
+           </div>
+          {% endfor %}
+     
+       <!--</div>-->
+    {% csrf_token %}
+    <!--<div class="ui hidden  divider"></div>-->
+    <button class="ui  labeled submit icon button tiny" type="submit"><i class="pen square icon"></i> Ответить</button>
+   </form>
+    </div> 
+
+   {%endif%}
+    {% endif %}
+  </div>
+</div>
+
+</div>
+ </div>
+<div class="ui divider"></div>
+
+  
+  
+
+
+<!--END вопрос задать-->

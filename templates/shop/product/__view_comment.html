@@ -1,0 +1,113 @@
+<!--Второя часть  -->
+<div class="column " >
+        <div class="ui  title active">Отзывы о {{ product.name }}</div>  
+        <div class="ui divider"></div>   
+        
+{% if comments %}
+    {% for comment in comments %}
+        {% include "shop/product/___prod_comment.html"  %}
+    {% endfor %} 
+<!--</div> -->
+ {% include "shop/product/__pagination.html" with page=comments %}   
+    
+          <div class="ui hidden  divider"></div>
+{% else %}
+    <div class="text">Пока к этому продукту нет отзывов</div>
+{% endif%}
+       
+<!--------------------form------------------------>
+<div class="ui  container" >
+ <div class="ui  title active">Оставить отзыв о препарате {{ product.name }}</div>  
+         <div class="ui divider"></div> 
+         
+    <div class="ui reply equal width form review " >    
+    <form  method="post" action=" ? ">
+
+    <div class="equal width fields"> 
+      <div class="eight wide required field"><label>{{form.name.label}}</label>{{ form.name }}</div> 
+      <div class="eight wide  required field"><label>{{form.email.label}}</label> {{ form.email}}</div>  
+    </div>
+    
+    <div class="equal width fields">     
+
+        <div class="sixteen  wide required field">          
+            <label>{{form.rating.label}}</label>          
+        </div>
+        <div class="sixteen  wide required field">
+        <div class="inline fields">
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="rating" value="0" id="id_rating_0" required="">
+                        <label>Отрицательно</label>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="rating" value="1" id="id_rating_1" required="">
+                        <label>Плохо</label>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="rating" value="2" id="id_rating_2" required="">
+                        <label>Средне</label>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="rating" value="3" id="id_rating_3" required="">
+                        <label>Нормально</label>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="rating" value="4" id="id_rating_4" required="">
+                        <label>Хорошо</label>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="rating" value="5" id="id_rating_5" required="">
+                        <label>Отлично</label>
+                    </div>
+                </div>   
+                
+        </div> 
+        </div>
+    <!--</div>-->
+    </div>  
+    
+  
+    <div class="fields"> 
+          <div class="sixteen wide required field">
+          <label>{{form.body.label}}</label> {{ form.body|safe }}
+          <input type="hidden" name="g-recaptcha-response" id='recaptcha' value="{{captcha}}">
+          {% csrf_token %}</div>
+
+
+
+    </div>
+    <div class="fields"> 
+        <div class="sixteen  wide required field">
+            <div class="ui hidden divider"></div>
+            <button class="ui  labeled submit icon button small" type="submit"><i class="arrow right icon blue"></i> Добавить отзыв</button>
+        </div>
+    </div>
+ 
+
+    <!--<div class="ui error message"></div>-->
+   
+   </form>
+   
+   </div>
+</div>
+<!------------ebd columm-------------------->
+</div>
+<!------------end form------------------------------->     
+           
+    

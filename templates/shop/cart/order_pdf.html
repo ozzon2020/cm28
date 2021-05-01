@@ -1,0 +1,54 @@
+<html> 
+<body> 
+       <h4>Магазин <span class="ui sub header blue">28cm.ru</span></h4> 
+  
+  <p> 
+  
+    Инвойс № {{ order.id }}</br> 
+    <span class="secondary"> 
+      {{ order.created|date:"M d, Y" }} 
+    </span> 
+  </p> 
+ 
+  <h3>Детали заказа :</h3> 
+  <p> 
+    Получатель: {{ order.first_name }} {{ order.last_name }}<br> 
+    E-mail:     {{ order.email }}<br> 
+    Адрес:      {{ order.postal_code }},{{ order.city }} ,{{ order.address }}<br> 
+    Телефон:    {{ order.phone }} 
+  </p> 
+ 
+  <h3>Товары в заказе</h3> 
+    <table > 
+    <thead> 
+      <tr> 
+        <th>Продукт</th> 
+        <th class="num">Цена</th> 
+        <th class="num">Количество</th> 
+        <th class="num">Сумма</th> 
+      </tr> 
+    </thead> 
+    <tbody> 
+      {% for item in order.items.all %} 
+        <tr class="row{% cycle "1" "2" %}"> 
+          <td>{{ item.product.name }}</td> 
+          <td class="num">{{ item.price }} &#x20bd;</td> 
+          <td class="num">{{ item.quantity }}</td> 
+          <td class="num">{{ item.get_cost }} &#x20bd;</td> 
+        </tr> 
+      {% endfor %} 
+      <tr > 
+        <td colspan="3">Оплата и доставка</td> 
+        <td >{{  order.get_payment_display}} </td> 
+      <tr class="total"> 
+        <td colspan="3">Всего</td> 
+        <td class="num">{{ order.summa }} &#x20bd;</td> 
+      </tr> 
+    </tbody> 
+  </table> 
+     
+  <span class="{% if order.paid %}paid{% else %}pending{% endif %}"> 
+    {% if order.paid %}Оплачен{% else %}Ждет оплаты{% endif %} 
+  </span> 
+</body> 
+</html> 

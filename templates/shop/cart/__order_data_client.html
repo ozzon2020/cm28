@@ -1,0 +1,104 @@
+
+<h3 class="ui sub header">Данные для доставки</h3>
+   
+
+<div class="ui form order">    
+<form action="." method="post" >
+  <!--------------------------->
+
+
+  <div class="fields">
+        <div class="eight wide field required">
+       
+         {{ form.first_name.label_tag }}
+          {{form.first_name}}
+                   
+        </div>
+        
+        <div class="eight wide field required">
+          {{ form.last_name.label_tag }}
+          {{form.last_name}}
+                  
+        </div>
+   
+  </div>
+  <div class="fields">
+        <div class="two wide field required">
+    
+          {{ form.postal_code.label_tag }}
+          {{form.postal_code}}
+                      
+        </div>
+        <div class="six wide field required">
+    
+          {{ form.city.label_tag }}
+          {{form.city}}
+                 
+        </div>
+        <div class="eight wide field required">
+          {{ form.address.label_tag }}
+          {{form.address}}
+                      
+        </div>
+  </div>
+  
+  <div class="fields">
+        <div class="six wide field required">
+          {{ form.email.label_tag }}
+          {{form.email}}
+                       
+        </div>
+        <div class="six wide field required">
+    
+          {{ form.phone.label_tag }}
+          {{form.phone}}
+                            
+                         
+        </div>
+        <div class="two wide field required">
+            <input data-pr={{ cart.get_total_price }} type="hidden" id="postId" name="postId" value="">
+             <input type="hidden" name="summa" id="id_summa" value="">
+        </div>
+  </div>
+
+  <!--------------------------------->
+
+   
+<div class="grouped fields required">
+<label>{{form.payment.label}}</label>
+<div class="ui clearing divider " ></div> 
+
+
+    
+  {% if form.payment.errors %}
+    <div class="ui pointing red basic label">Обязательно выбрать метод оплаты</div>
+  {% endif %}
+  
+    <div class="field">
+     <label>Оплата наличными</label>
+      <div class="ui slider checkbox"><input type="radio" name="payment" data-id="1" value="1" id="cash" ></div>
+            Оплата при получении заказа. За наличный расчет только на территории Москвы.В течение нескольких часов курьер свяжется с Вами по указанному Вами телефону и оговорит время и место доставки. 0% комиссии.
+    </div>
+    
+    <div class="field">
+     <label>Наложенный платеж +17%</label>
+      <div class="ui slider checkbox"><input type="radio" name="payment" data-id="2" value="2"  id="pochta" ></div>
+      Оплата при получении заказа. Заказ отсылается почтой наложенным платежом. Вы оплачиваете свой заказ при получении в своём почтовом отделении. Комиссия при отправке бандероли наложенным платежом составляет 15% + 2 % страхование посылки
+    </div>
+    
+    <div class="field">
+    <label>Через Сбербанк</label>
+        <div class="ui slider checkbox"><input type="radio" data-id="3" name="payment" value="3" id="sber" ></div>
+        Доставка заказа осуществляется после 100% предоплаты.</b> Оплата осуществляется в любом отделение Сбербанка РФ.  Если Вы желаете оплатить заказ  при получении на почте, то выбирайте  <b>"Наложенный платеж"</b>. Зачисление на счет в течении 1-2 суток.
+    </div>
+
+</div>
+
+
+{% csrf_token %}
+ <button href="{% url "shop:order_create" %}"  class="ui  labeled submit icon  button  small" type="submit"> 
+               Завершить оформление <i class="arrow right icon  blue align right"></i></button>
+
+</form>
+<div class="computer only ui hidden  divider"></div>
+</div>

@@ -1,0 +1,63 @@
+{% load shop_tags %}  
+<!-- 1 colum-->
+
+   <div class="ui  title active">О продукте {{ product.name }}</div>  
+         <div class="ui divider"></div> 
+<div class="ui items">
+  <div class="item">
+    <div class="ui image">
+     {% load thumbnail %}
+    {% thumbnail product.image "200x200" crop="100%"  as im %}
+    <img class="ui  left floated image"  src="{{ im.url }}" alt="{{product.name}}">
+    {% endthumbnail %}
+    </div>
+    <div class="content">
+      <div class="header">{{product.name}}</div>
+      <div class="meta">
+       {% if product.price %}
+        <span class="price">Цена  {{ product.price }}  <i class="ruble sign icon  small"></i></span>
+        <!--<span class="stay">1 месяц</span>-->
+       {%endif%} 
+        <span class="ui right floated ">  
+      
+        <span class="computer tablet only">Оценка</span> 
+       <i class="heart icon  
+           {%if product.total_raiting < 2 %} black 
+           {%elif product.total_raiting < 3.5%} grey 
+           {%elif product.total_raiting < 4.1%} pink
+           {%else%} red
+           {%endif%}"></i> {{product.total_raiting}}
+        
+      </span>  
+      </div>
+      
+        <div class="extra">
+        {% if product.available %}
+                    <form class="ui mini form" action="{% url "shop:cart_add" product.id %}" method="post">
+                     <div class="fields"> 
+                            {% for field in cart_product_form %}
+                             <div class="field ">{{ field }}</div>
+                            {% endfor %}
+                      <div class="field ">
+                      <input type="submit" value="В корзину" class="ui submit tiny button  " style="margin:2px;">
+                      </div>
+                      {% csrf_token %}
+                      </div>
+                    </form> 
+                  {% elif product.orderlink %}  
+                  <a href="{{product.orderlink}}" class="ui submit tiny button  "  target="_blank">Где можно купить</a>
+                  
+                  {%else %}  
+                  <div  class="ui submit tiny button  disabled">Отсутствует</div>
+        {%endif%}
+      </div>
+      <div class="description">
+      {{ product.description|safe }}
+      </div>
+    
+    </div>
+  </div>
+   </div> 
+
+
+  

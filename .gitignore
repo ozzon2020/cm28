@@ -1,0 +1,7 @@
+*.pyc
+*~
+__pycache__
+/TEMP
+/SERVER
+*.sql
+/media/cache

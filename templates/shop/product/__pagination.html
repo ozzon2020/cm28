@@ -1,0 +1,38 @@
+
+{% if page.paginator  and page.paginator.num_pages > 1 %} 
+                <div class="sixteen wide mobile eleven wide tablet sixteen wide computer column  " > 
+                   <div class="ui pagination computer tablet only large mobile only tiny menu text borderless  inverted">
+                                             
+                                {% if page.has_previous %}
+                                <div class="item">
+                                    <div class="content">
+                                        <a class="ui blue  " href="{{ request.path }}?page={{ page.previous_page_number }}">
+                                        <i class="icon arrow left "></i></a>
+                                    </div>
+                                </div>
+                                {% endif %}         
+               
+                    {% for num in page.paginator.page_range %}
+                        {% if page.number == num %}
+                         <div class="item "><div class="content"><span class="ui  basic label grey inverted ">{{ num }}</span></div></div>
+                         {% elif num > page.number|add:'-3' and num < page.number|add:'3' %}
+                         <div class="item">
+                            <div class="content">
+                            <a class="ui blue basic label " href="{{ request.path }}?page={{ num }}">{{ num }}</a>
+                            </div>
+                         </div>
+                       
+                         {% endif %}                                     
+                    {% endfor %}
+                           
+                             {% if page.has_next %}   
+                            <div class="item">
+                                <div class="content">
+                                <a class="ui blue " href="{{ request.path }}?page={{ page.next_page_number }}">
+                                <i class="icon arrow right "></i></a>
+                                </div>
+                            </div>
+                             {% endif %}
+                    </div>              
+                </div>
+{% endif %}

@@ -1,0 +1,25 @@
+<div class=" ui  twelve wide column " >
+Категории продуктов:
+<div class="ui horizontal tiny  link list" > 
+<div class="item "></div>  
+    {% for objmy in menu_product %}  
+    <div class="item ">
+    <div class="ui sub header {% if objmy.pk == category.var.pk or objmy.pk == product.category.var.pk%}  blue {% endif %}">{{objmy.name}}</div>
+   
+                {% for pr in objmy.medrazdel.all %}
+                {% if pr.active %}
+                <a href="{% url "shop:category-list" pr.slug %}" 
+                    class="{% if category.slug == pr.slug or product.category.slug == pr.slug %} active {% endif %}  item ">
+                         <i class=" {% if category.slug == pr.slug  or product.category.slug == pr.slug %} blue {% endif %}  caret right icon tiny">
+                        </i>{{pr.name}}
+                    </a>
+                {% endif %}
+               {% endfor %}
+         
+    </div>
+                
+    {% endfor %}  
+
+</div>  
+</div>  
+<!--end accordion-->

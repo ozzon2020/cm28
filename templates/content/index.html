@@ -1,0 +1,197 @@
+
+{% extends "base_general.html" %}
+
+{% block title %}{{main.title}}{% endblock %}
+{% block meta_description %}{{main.meta_description}}{% endblock %}
+{% block meta_keywords %}{{main.meta_keywords}}{% endblock %}
+{% block og_title %}{{main.title}}{% endblock %}
+{% block og_description %}{{main.meta_description}}{% endblock %}
+{% block og_url %}{% url "content:index" %}{% endblock %}
+{% block item_name %}{{main.title}}{% endblock %}
+{% block item_description %}{{main.meta_description}}{% endblock %}
+{% block canonical %}{% url "content:index" %}{% endblock%}
+
+
+{% block navigator %}{% endblock navigator%}  
+{% block content_main %}
+<div class="container grid stackable ">  
+  <div class="ui tablet only hidden divider"></div>
+  
+<div class="two column stackable ui grid">
+  <div class="column">
+    <div class="ui segment">
+    {% load thumbnail %}
+{% thumbnail main.image "300x300" crop="100%"  as im %}              
+<img class="ui top aligned left floated  rounded image"  src="{{ im.url }}" >            
+{% endthumbnail %}
+    <div class="ui tablet computer only ">
+    {{main.main|safe}}
+    </div>
+     <div class="ui mobile only ">
+<!----------------------------------------------->
+   <div class="ui red  fluid accordion">
+            <div class="title active"><i class="dropdown icon"></i> О сайте 
+            <div class="active content">
+    {{main.meta_description}}
+    
+    <span class="ui horizontal divider fitted"><i class="angle down icon yellow small circular button"></i></span>
+  </div>
+            </div>
+        <div class="content">
+          <span class="transition visible" style="display: block !important;"> {{main.main|safe}}</span>
+        </div>
+  </div>
+   
+<!----------------------------------------------------->
+    </div>
+    
+    
+</div>    
+  </div>
+  
+  <div class="column">
+    <!------------------------------------>
+       <h4 class="ui horizontal header divider">
+               Популярные препараты
+              </h4>
+            <!--<h4 class="ui sub header ">Популярные препараты</h4>-->
+      
+            <div class="ui computer only  two cards grid padded">
+                {% for product in popular_product %}
+                    {% if product.active and createnow > product.created %}
+                      {% include "shop/product/__one_view_product.html"  %} 
+                    {% endif %}
+                {% endfor %}
+            </div>
+            
+            <div class="ui mobile tablet only stackable cards grid padded"> 
+                {% for product in popular_product %}
+                    {% if product.active and createnow > product.created %}
+                      {% include "shop/product/__one_view_product.html"  %} 
+                    {% endif %}
+                {% endfor %}
+             </div>
+  <!--<h4 class="ui sub header ">Основные категории</h4>-->
+     <h4 class="ui horizontal header divider">
+                Основные категории
+              </h4>
+  <!----------------------------------------->
+        <div class="ui computer only  three cards grid padded">
+                {% for cat in medrazdel %}
+                   
+                    {% for linkpage in cat.medrazdel.all %}
+                    {% if linkpage.active and forloop.counter < 2 %}
+                    <a href="{{linkpage.get_absolute_url}}" class="card yellow"> 
+                    <div class="image">
+                        {% load thumbnail %}
+                        {% thumbnail cat.image "200x150" crop="70%"  as im %}
+                       <img class="ui top   tiny image"  src="{{ im.url }}" alt="{{cat.name}}">
+                        {% endthumbnail %}
+                    </div>
+                    <div class="ui basic  bottom attached button small"> {{cat.name}}</div>
+                    </a> 
+                    {% endif %}  
+                    {% endfor %}
+                    
+
+                    
+                 
+                {% endfor %}
+                   
+                    
+            </div>
+            
+            <div class="ui mobile tablet only  two cards "> 
+                    {% for cat in medrazdel %}
+                    
+                        <!--<div >-->
+                         
+                        {% for linkpage in cat.medrazdel.all %}
+                        {% if linkpage.active and forloop.counter < 2 %}
+                        <a href="{{linkpage.get_absolute_url}}" class="card yellow"> 
+                            <div class="image">   
+                                {% load thumbnail %}
+                                {% thumbnail cat.image "150x80" crop="50%"  as im %}
+                               <img class="ui  mini image"  src="{{ im.url }}" alt="{{cat.name}}">
+                                
+                                  {% endthumbnail %}
+                            </div>
+                        <div class="ui basic  bottom attached button tiny"> {{cat.name}}</div>
+                        </a> 
+                         {% endif %}  
+                        {% endfor %}
+                                        
+                {% endfor %}
+             </div>
+         
+<!----------------------------------------->
+
+             
+             
+             <h4 class="ui horizontal header divider">
+                <a href="{% url "qs:questions-detail"  %}">Новые вопросы</a>
+              </h4>
+
+            {% if popular_questions %}
+            <div class="ui comments">
+                {%for qs in popular_questions%}
+                      
+                <div class="comment">
+                <a href="{% url "qs:qs-detail" qs.pk%}"> 
+                        <!--<div class="avatar"><i class="question icon blue"></i></div>-->
+                        <div class="content">
+                                <i class="question icon blue"></i>
+                                <span class="author"><span class="ui sub header blue">{{qs.var.name}}</span> {{qs.theme}}</span>   
+                                <div class="text">
+                                  <a href="{% url "qs:qs-detail" qs.pk%}"> {{qs.main|striptags|truncatechars:100}}
+                                </div>
+                         
+                        </div>
+                </a>        
+                </div>
+                {%endfor%}
+            </div>
+            {%endif%} 
+        <h4 class="ui horizontal header divider">
+                Новые статьи
+              </h4>
+   {% include "content/_index_menu_pages.html"  %}
+   <!--</div>-->
+         </div>
+  
+
+</div>
+
+
+<!-----------------end segment    -->
+</div> 
+
+  
+ <!-------------------promo-------------------------->
+  <div class="computer only column sixteen wide">    
+ {% include "promo/970x250.html"  %}  
+  
+</div>
+<div class="tablet only ui equal width row" > 
+{% include "promo/728x90.html"  %}
+ </div> 
+<div class="sixteen wide  mobile only column"> 
+ {% include "promo/320x100.html"  %} 
+ {% include "promo/320x100.html"  %}  
+</div>     
+<!--------------------------------------------->    
+{% endblock content_main%} 
+
+
+
+{% block footer_12 %}
+{% include "content/__footer_menu_category.html"  %}
+{% endblock footer_12 %}  
+
+
+{% block domready %}
+{% endblock %}
+
+
+
+

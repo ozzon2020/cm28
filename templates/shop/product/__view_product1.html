@@ -1,0 +1,57 @@
+<!-- 1 colum-->
+<div class="ui items">
+  <div class="item">
+    <div class="ui image">
+     {% load thumbnail %}
+    {% thumbnail product.image "200x200" crop="100%"  as im %}
+    <img class="ui  left floated image"  src="{{ im.url }}" alt="{{product.name}}">
+    {% endthumbnail %}
+    </div>
+    <div class="content">
+      <div class="header">{{product.name}}</div>
+      <div class="meta">
+        <span class="price">Цена  {{ product.price }}  <i class="ruble sign icon  small"></i></span>
+        <!--<span class="stay">1 месяц</span>-->
+        
+        <span class="ui right floated ">  
+        {% with total_likes=product.total_likes users_like=product.users_like.all %}
+              <a href="#" data-tooltip="Положительно" data-inverted="" data-position="top left" data-id="{{ product.id }}" data-action="{% if request.user in users_like %}un{% endif %}like" class="like " id="link{{ product.id }}" rel="nofollow"><i class="thumbs up   {% if request.user not in users_like %}outline orange
+          {% else %} orange{% endif %} icon"></i></a>
+           <span  id="total{{ product.id }}">{{ total_likes}}</span>
+           {% endwith %} 
+          {% with total_dislikes=product.total_dislikes users_dislike=product.users_dislike.all %}
+            <a href="#"  data-tooltip="Отрицательно " data-inverted="" data-position="top left" data-id="{{ product.id }}" data-action="{% if request.user in users_dislike %}un{% endif %}dislike" class="dislike " id="link_d{{ product.id }}" rel="nofollow"><i class="thumbs down   {% if request.user not in users_dislike %}outline black
+         {% else %} black{% endif %} icon"></i></a>
+           <span  id="total_d{{ product.id }}">{{ total_dislikes}}</span>
+         {% endwith %} 
+         </span>  
+      </div>
+      
+        <div class="extra">
+        {% if product.available %}
+                    <form class="ui mini form" action="{% url "shop:cart_add" product.id %}" method="post">
+                     <div class="fields"> 
+                            {% for field in cart_product_form %}
+                             <div class="field ">{{ field }}</div>
+                            {% endfor %}
+                      <div class="field ">
+                      <input type="submit" value="В корзину" class="ui submit tiny button  " style="margin:2px;">
+                      </div>
+                      {% csrf_token %}
+                      </div>
+                    </form> 
+                  {% elif product.orderlink %}  
+                  <a href="{{product.orderlink}}" class="ui submit tiny button  "  target="_blank">Где можно купить</a>
+                  
+                  {%else %}  
+                  <div  class="ui submit tiny button  disabled">Отсутствует</div>
+        {%endif%}
+      </div>
+      <div class="description">
+      {{ product.description|safe }}
+      </div>
+    
+    </div>
+  </div>
+   </div> 
+ 

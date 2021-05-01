@@ -1,0 +1,9 @@
+User-agent: Googlebot
+Disallow: /admin/ 
+
+
+User-agent: *
+Disallow: /admin/ 
+
+Host: 28cm.ru
+Sitemap: https://28cm.ru/sitemap.xml

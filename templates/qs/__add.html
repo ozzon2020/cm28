@@ -1,0 +1,41 @@
+<!--вопрос задать-->
+
+<div class="ui  container" >
+
+    <span class="ui syb header blue">Задать вопрос</span>
+    <div class="ui reply form qs">
+     <form  method="post" action = "{% url "qs:qs_create" %}" > 
+    <div class="equal width fields">
+      <div class="eight wide required field"><label>{{form.var.label}}</label>{{ form.var }}</div>
+      <div class="eight wide required field"><label>{{form.theme.label}}</label>{{ form.theme }}</div>
+    </div>
+  
+    <div class="equal width fields"> 
+      <div class="eight wide required field"><label>{{form.name.label}}</label>{{ form.name }}</div>
+      <div class="eight wide  required field"><label>{{form.email.label}}</label> {{ form.email}}</textarea></div>  
+    </div>
+  
+    <div class="fields"> 
+          <div class="twelve wide required field"><label>{{form.main.label}}</label> {{ form.main|safe }}</textarea></div>
+          <div class="four wide field">{% csrf_token %}
+          {{form.captcha}}
+          </div>
+    </div>
+                <div class="fields"> 
+                <div class="sixteen  wide required field">
+                 <div class="ui hidden divider"></div>
+             <button class="ui  labeled submit icon button small" type="submit">
+               <i class="arrow right blue icon "></i> Отправить
+               </button>
+               </div>
+           </div>
+ 
+
+    <div class="ui error message"></div>
+       </form></div>
+
+</div>
+
+ <!--<div class="ui hidden divider"></div>-->
+
+<!--END вопрос задать-->

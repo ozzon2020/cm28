@@ -1,0 +1,115 @@
+
+ <!--<div class="ui  container">-->
+    <!--<div class="ui equal width stackable internally  grid" >  -->
+<!--comp only-->
+<div class="computer only column four wide  aligned ">
+      <!--<div class="computer only column four wide  aligned ">-->
+      
+    <!--start accordion-->
+       <div class="ui  fluid accordion orange">
+
+          {% for objmy in left_menu %}
+             {% for linkpage in objmy.chastrazdel.all %}
+              {% if linkpage.active  %}
+                    <div class="{% if section.ch.pk == linkpage.pk %} active {% endif %} title ui orange fluid inverted button left" style="margin:5px 0;">{{linkpage.name}}
+                   </div>
+                                      
+              <div class="{% if section.ch.pk == linkpage.pk %} active {% endif %}content"> 
+                 <div class="ui link list small middle aligned divided"> 
+                    {% for page in linkpage.chrazdel.all %}
+                        {% if page.active == True and timenow > page.created  %}
+                            <a href="{{ page.get_absolute_url }}" title="{{page.name}}"  
+                               class="{% if section.namefile == page.namefile %} active {% endif %} item" style="margin:6px 0;">
+                            <i class="caret right icon "></i>{{page.name}}
+                           </a>
+                         {% endif %}                      
+                     {% endfor %}    
+                  </div>  
+              </div>
+             {% endif %}  
+           {% endfor %}                             
+         {% endfor %}  
+       <div class="ui hidden  divider"></div>
+       
+      </div>  
+      <!--end accordion-->
+
+         {% include "promo/_rek_bot_section.html"  %} 
+      
+</div>
+<!--END comp only-->    
+
+<div class="ui  twelve  column" >
+          <!--<div class="ui mobile tablet only grid padded " >-->
+                <!--<div class="ui  borderless tiny  fluid menu ">   -->
+                <!--</div>  -->
+          <!--</div>  -->
+     
+     
+  
+  
+            
+<!--  Mobile -->  
+
+         <div class="ui mobile tablet only grid padded" >
+            <div class="ui  borderless tiny  fluid menu ">
+               <a href="{{ section.var.get_absolute_url }} " class="ui header item orange">{{ section.var.name|upper }} </a>
+                 <div class="right menu">
+                    
+                     <div class="ui dropdown my_">
+                                 <div class="item">меню  <i class="bars icon orange large"></i></div>
+                           <div class="menu ">
+                              
+                                       {% for objmy in left_menu %}
+                                          {% for linkpage in objmy.chastrazdel.all %}
+                                             {% if linkpage.active  %}
+                                             <div class="item {% if section.ch.pk == linkpage.pk %} active {% endif %}"><i class="chevron down icon"></i>{{linkpage.name}}
+                                               <div class="ui vertical small menu">
+                                                    {% for page in linkpage.chrazdel.all %}
+                                                       {% if page.active   and createnow > page.created  %}
+                                                       <a href="{{ page.get_absolute_url }}" title="{{page.name}}" 
+                                                       class="item {% if section.namefile == page.namefile %} active {% endif %} " >
+                                                          - {{page.name}}
+                                                         </a>
+                                                       {% endif %}  
+                                                     {% endfor %}  
+                                                     
+                                                </div>                     
+                                              </div>                      
+                                              {% endif %}  
+                                           {% endfor %}    
+                                                               
+                                       {% endfor %}      
+                               </div>
+                        </div>
+                         
+                 </div>        
+            </div>
+         </div>  
+<!-- End Mobile -->
+  
+         <div class="ui tiny text menu " style="padding:0;margin:0;">
+                        <div class="ui item ">{{ section.name}}</div>
+                        <div class="right menu">
+                            
+                        </div>
+         </div>
+<div class="ui container">         
+  <div class="ui clearing divider"></div>
+   {{ section.main |safe}}
+ {% include "content/_tags_views.html"  %}  
+
+
+   </div>
+   <!--END twelve  column-->
+</div>
+
+   
+
+   
+   
+   
+
+
+
+

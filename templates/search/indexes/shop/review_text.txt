@@ -1,0 +1,3 @@
+{{ object.product }}
+{{ object.name }}
+{{ object.body }}

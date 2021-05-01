@@ -1,0 +1,184 @@
+{% spaceless %}
+{% load compress %}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta content="ru" http-equiv="Content-Language" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="description" content="{% block meta_description %}{% endblock %}">
+        <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+
+        <meta property="og:title" content="{% block og_title %}{% endblock %}" />
+        <meta property="og:description" content="{% block og_description %}{% endblock %}" />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% block og_url %}{% endblock %}" />
+        <meta property="og:name" content="{% block item_name %}{% endblock %}" />
+
+        <link rel="canonical" href="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% block canonical %}{% endblock %}"/>
+       
+
+        <link rel="shortcut icon" href="/media/pub/is_orange.png" />
+        {% block recaptcha %}
+        {% endblock recaptcha %}
+        
+        {% compress css %}
+        <!--<link rel="stylesheet" href="/static/css/semantic.min.css" type="text/css"/>-->
+          <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      type="text/css"
+    />
+        <link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="/static/css/screen-media.css" rel="stylesheet" type="text/css" />
+       {% endcompress %}  
+       {% compress js %}
+        <!--noindex-->
+
+        <!--[if lt IE 10]>
+<div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="/inc/images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+<script src="/static/js/html5shiv.min.js"></script>
+        <![endif]-->    
+     
+        {% endcompress %}  
+
+    </head>
+    <body>
+    
+    {% include "counter.html"  %} 
+    <div id="top"></div>
+    <a class=" circular  icon  ui red big button right floated" href="#top" id="toTop" data-slide="slide"><i class="icon chevron up "></i></a>
+   <!--  Desctop -->    
+  {% include "desctop_menu.html" %}   
+  
+   <!--  Mobile -->  
+  {% include "mobile_menu.html" %}
+    <!-- End Mobile -->
+                <div class="ui  padded grid">
+                {% include "header.html" %}
+                 </div>
+
+<div class="ui  padded grid">      
+    <div class="ui container" >
+
+            {% block navigator %}    
+                  <div class="ui small breadcrumb red">
+                                            {% block breadcrumbs %}  
+                                                <a href="{% url "content:index" %}" class="section">Главная</a> 
+                                            {% endblock %}
+                                         
+                  </div> 
+              <div class="ui divider"></div>   
+            {% endblock navigator%}
+    </div>     
+      <div class="ui hidden  divider"></div>   
+</div>      
+            
+  <!--START CONTENT   -->
+<div class="ui  container" >
+<div class="ui equal width stackable internally  grid" >
+    
+                      <!-- start end -->
+                               {% block top_block %}
+
+                              {% endblock top_block %}
+                              <!-- end -->
+                                 {% if messages %}
+                                 <div class="ui hidden  divider"></div>
+                                 <div class="mobiledivider"></div> 
+                                      <div class="ui grid container "  >
+                                      <div class="sixteen wide mobile eleven wide tablet sixteen wide computer column  " >
+                                                  {% for message in messages %}
+                                                      {% if forloop.first %}
+                                                     <div class="ui {{ message.tags }} message small"><i class="close icon"></i>
+                                                      {% endif %}   
+                                                          {{ message|safe }}
+                                                  {% endfor %}
+                                                       </div>
+                                       </div>                 
+                                       </div>  
+                              
+                                      {% endif %}
+
+  <!------------------>
+  
+<!--<div class="ui black stacked compact segment">-->
+  <!--Current device:-->
+  <!--<div class="ui mobile only red label">Mobile</div>-->
+  <!--<div class="ui tablet only blue label">Tablet</div>-->
+  <!--<div class="ui computer only yellow label">Computer</div>-->
+
+<!--</div>-->
+
+  <!------------------------->
+    {% block content_main %}
+    <div class="computer only column four wide  aligned ">
+    {% block four_content_main %}  
+        {% include "content/_cart_page.html"%} 
+    {% endblock four_content_main %}
+    </div>
+    <div class="ui  twelve  column" >
+          {% block twelve_content_main %}
+                
+          {% endblock twelve_content_main %}
+          
+          {% if is_paginated  %} 
+                  {% include "_pagination.html"%} 
+          {% endif %}
+    </div>
+    {% endblock content_main%}   
+    
+
+    
+
+      <!--paginater--> 
+
+                          <div class="ui grid container ">
+                         {% block butpanel %}   
+                         
+                         {% include "promo/rek_bot_one.html"  %}  
+                         <div class="ui hidden  divider"></div>
+                       
+                         {% endblock butpanel %}  
+                         </div>           
+
+  
+  
+  </div>  </div>  
+  <!--end CONTENT-->
+  <!--foot-->
+      <div  >{% include "footer.html"  %}</div>  
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="/static/js/index.js"></script>
+    <script src="/static/js/js.cookie.min.js"></script>
+    <!--<script>-->
+      <!--$(document).ready(function() {-->
+        <!--$(".ui.toggle.button").click(function() {-->
+          <!--$(".mobile.only.grid .ui.vertical.menu").toggle(100);-->
+        <!--});-->
+
+        <!--$(".ui.dropdown").dropdown();-->
+      <!--});-->
+    <!--</script>-->
+
+       
+<script>
+  $(document).ready(function(){
+    {% block domready %}
+    {% endblock %}
+  });
+</script>
+  <!--/noindex-->
+    </body>
+
+</html>
+{% endspaceless %}

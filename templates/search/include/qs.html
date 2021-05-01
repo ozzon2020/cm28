@@ -1,0 +1,22 @@
+{%load highlight %}
+<div class="ui container">
+<a  href="{% url "qs:questions-detail" %}" rel="nofollow" data-tooltip="Вопрос - ответ"  data-inverted="">
+<i class="question circle icon large blue "></i></a> 
+{% if result.object.theme %}
+<span class="ui sub header blue">
+<a  href="{% url "qs:qs-detail" result.object.pk %}" rel="nofollow" >тема ( {{result.object.theme}} ) </a>
+<span  class="ui basic small label">{{ result.object.var}} </span></span>
+{% endif%}
+<span  class="ui small label">{{ result.object.created|timesince }} </span>
+    <div class="content">
+        <div class="text">
+        <a  href="{% url "qs:qs-detail" result.object.pk %}" rel="nofollow" >
+        {% highlight result.object.main with query max_length 100 %}
+        {% if result.object.reply %}
+        <i class="circular inverted blue user md icon small "></i>{% highlight result.object.reply with query max_length 200 %}
+        {% endif%}
+        </a>
+        </div>
+    </div>
+<div class="ui divider"></div>
+</div>    

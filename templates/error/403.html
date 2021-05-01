@@ -1,0 +1,59 @@
+
+{% extends "base_general.html" %}
+
+{% block meta_description %}Ошибка 403 (Forbidden, доступ запрещен){% endblock %}
+{% block meta_keywords %}Ошибка 403 (Forbidden, доступ запрещен){% endblock %}
+{% block title %}Ошибка 403 (Forbidden, доступ запрещен){% endblock %}
+{% block og_title %}Ошибка 403 (Forbidden, доступ запрещен){% endblock %}
+
+
+
+{% block breadcrumbs %}    
+{{ block.super }} 
+
+<span class="divider">/</span> 403
+{% endblock %}
+
+ 
+  {% block content_main %}   
+   
+ 
+
+<div class="ui grid container centered">
+<div class="row ">
+<div class="ui vertical stripe segment">
+                <div class="ui text container centered" style="height:300px;">
+
+
+<div class="ui huge horizontal statistic">
+  <div class="value">
+    403 
+  </div>
+  
+  <div class="label">Forbidden </div>
+</div>
+                   
+                    <h4 class="ui horizontal header divider">
+                        <a href="#">Доступ запрещен</a>
+                    </h4>
+                  
+                    <p>Отказано в доступе: у вас нет доступа к этой части сайта. Попробуйте воспользоваться навигацией сайта.</p>
+
+                </div>
+</div>
+</div>
+</div>
+  {% endblock %} 
+
+
+
+      
+    {% block butpanel %}   
+
+    {% endblock %}    
+    
+    {% block foot_two %}  
+
+    {% endblock %}       
+{% block domready %}       
+{% endblock %}

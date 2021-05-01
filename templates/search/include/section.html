@@ -1,0 +1,24 @@
+    <!--section  -->
+    {%load highlight %}
+ 
+<div class="ui container">
+    <a  href="{{result.object.get_absolute_url }}" rel="nofollow" data-tooltip="Страница"  data-inverted="">
+        <i class="sticky note outline icon large blue"></i>
+    </a> 
+    
+    
+        <a  href="{{result.object.get_absolute_url }}" rel="nofollow" >
+            <span class="ui sub header black">{{ result.object.ch.name }}</span> : 
+            <span class="ui sub header blue">{{ result.object.name }} </span>
+        </a>
+    <div class="content">       
+        <div class="text">
+                  <a  href="{{result.object.get_absolute_url }}" rel="nofollow" >             
+                        {% highlight result.object.main with query max_length 400 %}
+                   </a>
+        </div>
+    </div>
+    <div class="ui divider"></div>
+    </div>
+
+               <!--section  -->

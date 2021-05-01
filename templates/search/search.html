@@ -1,0 +1,68 @@
+{% extends "base_general.html" %}
+
+{% block title %}Результаты поиска "{{query}}"{% endblock %}
+{% block meta_description %}Поиск по "{{query}}"{% endblock %}
+{% block meta_keywords %}Поиск по "{{query}}"{% endblock %}
+
+{% block og_title %}Поиск по "{{query}}"{% endblock %}
+{% block og_description %}Поиск по "{{query}}"{% endblock %}
+
+{% block item_name %}Поиск по "{{query}}"{% endblock %}
+{% block item_description %}Поиск по "{{query}}"{% endblock %}
+
+
+
+{%load highlight %}
+
+{% block text_container%}
+
+                 <h4 class="ui  header  centered ">
+                     <span  class="ui inverted header">Результаты</span> <span  class="ui blue header"> поиска</span>
+                    </h4>
+                                 
+{% endblock text_container%}
+
+{% block breadcrumbs %}   
+{{ block.super }}
+ <span class="divider"> /</span> Поиск по "{{query}}"
+{% endblock %}
+
+ {% block four_content_main %}   
+  
+  {{ block.super }}
+
+  <!-------------------promo-------------------------->
+  {% include "promo/240x400.html"  %}  
+
+  <!-------------------promo-------------------------->
+ {% endblock four_content_main %} 
+ 
+ {% block twelve_content_main %}
+      {{ block.super }}
+        <div class="ui equal width stackable internally grid">
+        
+        {% include "search/_search_main.html"  %}  
+        <!-------------------promo-------------------------->
+  <div class="computer only column sixteen wide">    
+ {% include "promo/970x250.html"  %}  
+  
+</div>
+<div class="tablet only ui equal width row"> 
+{% include "promo/728x90.html"  %}
+ </div> 
+<div class="sixteen wide  mobile only column"> 
+ {% include "promo/320x100.html"  %} 
+ {% include "promo/320x100.html"  %}  
+</div>     
+<!--------------------------------------------->
+         </div>
+ 
+
+ {% endblock twelve_content_main %}
+{% block footer_12 %}
+ {% include "shop/__footer_menu_category.html"  %}
+{% endblock footer_12 %}  
+
+ 
+ {% block domready %}
+ {% endblock %}

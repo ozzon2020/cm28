@@ -1,0 +1,222 @@
+{% spaceless %}
+{% load compress %}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta content="ru" http-equiv="Content-Language" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="description" content="{% block meta_description %}{% endblock %}">
+        <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+
+        <meta property="og:title" content="{% block og_title %}{% endblock %}" />
+        <meta property="og:description" content="{% block og_description %}{% endblock %}" />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% block og_url %}{% endblock %}" />
+        <meta property="og:name" content="{% block item_name %}{% endblock %}" />
+
+        <link rel="canonical" href="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% block canonical %}{% endblock %}"/>
+       
+
+        <link rel="shortcut icon" href="/static/images/logo/logo_y.png" />
+        {% block recaptcha %}
+        {% endblock recaptcha %}
+        
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" type="text/css" />
+        {% compress css %}
+
+  
+        <link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="/static/css/screen-media.css" rel="stylesheet" type="text/css" />
+ 
+       {% endcompress %}  
+       {% compress js %}
+        <!--noindex-->
+
+ 
+     
+        {% endcompress %}  
+        
+        
+ <style type="text/css">
+
+    .hidden.menu {
+      display: none;
+    }
+
+  
+    .quote.stripe.segment {
+      padding: 0em;
+    }
+
+
+
+  </style>
+        
+
+    </head>
+    <body>
+    
+    {% include "counter.html"  %} 
+    <div id="top"></div>
+    <a class=" circular  icon  ui yellow big button right floated" href="#top" id="toTop" data-slide="slide"><i class="icon chevron up "></i></a>
+   <!--  Desctop -->    
+  {% include "desctop_menu.html" %}   
+
+   <!--  Mobile -->  
+  {% include "_mobile_menu.html" %}
+    <!-- End Mobile -->
+                <div class="ui grid padded ">
+                {% include "header.html" %}
+                 </div>
+
+<div class="ui container " >      
+    <div class="ui container " >
+        <div class="ui tablet mobile only  hidden  divider"></div>   
+            {% block navigator %}    
+                  <div class="ui small breadcrumb blue" >
+                                            {% block breadcrumbs %}  
+                                                <a href="{% url "content:index" %}" class="section">Главная</a> 
+                                            {% endblock %}
+                                         
+                  </div> 
+              
+              <!--<div class="ui hidden divider"></div>-->
+            {% endblock navigator%}
+           
+    </div>     
+      <div class="ui hidden  divider" style="margin-top:-10px;"></div>   
+      
+</div>      
+            
+  <!--START CONTENT   -->
+<div class="ui  container" >
+<div class="ui equal width stackable internally  grid" >
+    
+                      <!-- start end -->
+                               {% block top_block %}
+                          
+                              {% endblock top_block %}
+                              <!-- end -->
+                                 {% if messages %}
+                                 <div class="ui hidden  divider"></div>
+                                 <!--<div class="mobiledivider"></div> -->
+                                      <div class="ui grid container "  >
+                                      <div class="sixteen wide mobile eleven wide tablet sixteen wide computer column  " >
+                                                  {% for message in messages %}
+                                                      {% if forloop.first %}
+                                                     <div class="ui {{ message.tags }} message small"><i class="close icon"></i>
+                                                      {% endif %}   
+                                                          {{ message|safe }}
+                                                  {% endfor %}
+                                                       </div>
+                                       </div>                 
+                                       </div>  
+                              
+                                      {% endif %}
+
+  <!------------------>
+
+
+  <!------------------------->
+    {% block content_main %}
+     
+    <div class="computer only column four wide  aligned ">
+    {% block four_content_main %}  
+        {% include "content/_cart_page.html"%} 
+    {% endblock four_content_main %}
+    </div>
+    <div class="ui  twelve  column" >
+          {% block twelve_content_main %}
+                
+          {% endblock twelve_content_main %}
+    {% block paginated %}      
+          {% if is_paginated  %} 
+                  {% include "_pagination.html"%} 
+          {% endif %}
+    {% endblock paginated %}      
+    </div>
+    {% endblock content_main%}   
+         
+
+  
+  
+  </div>  
+  </div>  
+  <!--end CONTENT-->
+  
+
+  
+<!--noindex-->
+  {% block footer %}  
+        
+    <div class="grid footer segment "  style="background: #f6f6f6; border-top:2px solid #FFD700;" >
+
+            <div class="ui container " >
+                <div class="ui hidden divider"></div>
+                    <div class="ui stackable  grid " >    
+                     {% block footer_12 %}
+                     {% include "footer_12.html"  %}
+                    {% endblock footer_12 %} 
+     
+                      {% block footer_4 %}
+                    {% include "footer_4.html"  %}
+                    {% endblock footer_4 %}    
+        
+            </div>
+        </div> 
+    
+    </div>
+  {% endblock footer %} 
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="/static/js/index.js"></script>
+    <script src="/static/js/js.cookie.min.js"></script>
+
+  <script>
+  $(document)
+    .ready(function() {
+
+      // fix menu when passed
+      $('.masthead_decktop')
+        .visibility({
+          once: false,
+          onBottomPassed: function() {
+            $('.fixed.menu').transition('fade in');
+       
+          },
+          onBottomPassedReverse: function() {
+            $('.fixed.menu').transition('fade out');
+
+          }
+        })
+      ;
+
+      // create sidebar and attach to menu open
+      $('.ui.sidebar')
+        .sidebar('attach events', '.toc.item')
+      ;
+
+    })
+  ;
+  </script>
+       
+<script>
+  $(document).ready(function(){
+    {% block domready %}
+    {% endblock %}
+  });
+</script>
+  <!--/noindex-->
+    </body>
+
+</html>
+{% endspaceless %}

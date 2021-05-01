@@ -1,0 +1,4 @@
+{{ object.title }}
+{{ object.ch }}
+{{ object.name }}
+{{ object.main }}

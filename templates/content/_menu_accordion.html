@@ -1,0 +1,28 @@
+<div class="ui large  fluid styled accordion ui blue"> 
+
+          {% for objmy in menu_page %}
+             {% for linkpage in objmy.chastrazdel.all %}
+
+              {% if linkpage.active %}
+                    <div class="{% if section.ch.pk == linkpage.pk %} active {% endif %} title ui sub header blue fluid  left" >{{linkpage.name}}
+                   </div>
+                                      
+              <div class="{% if section.ch.pk == linkpage.pk %} active {% endif %}content"> 
+                 <div class="ui link list small middle aligned ui blue"> 
+                    {% for page in linkpage.chrazdel.all %}
+                        {% if page.active == True and createnow > page.created  %}
+                            <a href="{{ page.get_absolute_url }}" title="{{page.name}}"  
+                               class="{% if section.namefile == page.namefile %} active {% endif %}  item  " >
+                            <i class=" {% if section.namefile == page.namefile %} blue {% endif %}  caret right icon "></i>{{page.name}}
+                           </a>
+                         {% endif %}                      
+                     {% endfor %}    
+                  </div>  
+              </div>
+             {% endif %}  
+           {% endfor %}                             
+         {% endfor %}  
+       <!--<div class="ui hidden  divider"></div>-->
+       
+</div>  
+<!--end accordion-->

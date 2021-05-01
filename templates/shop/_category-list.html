@@ -1,0 +1,46 @@
+
+     <h1 class="ui  sub  header blue">{{category.name}}</h1>
+
+    <div class="ui blue  fluid accordion">
+            <div class="title active"><i class="dropdown icon"></i> Препараты {{category.name|lower}}  
+            <div class="active content">
+    <p>{{category.title}} ...</p>
+    <!--<div class="ui divider"></div>  -->
+    <span class="ui horizontal divider blue"><i class="angle down icon blue small circular button"></i></span>
+  </div>
+            </div>
+        <div class="content">
+          <span class="transition visible" style="display: block !important;">{{category.description|safe}}</span>
+        </div>
+  </div>
+    <!--<div class="ui divider"></div>  -->
+
+     
+     
+      <div class="ui only  mobile computer three  stackable cards grid padded ">
+         {% for product in products %}
+               {% if product.active and createnow > product.created %}
+                  {% include "shop/product/__one_view_product.html"  %} 
+               {% endif %}
+         {% endfor %}
+      </div>
+        
+      <div class="ui  tablet only two  stackable cards grid padded " >
+         {% for product in products %}
+               {% if product.active and createnow > product.created %}
+                  {% include "shop/product/__one_view_product.html"  %} 
+               {% endif %}
+         {% endfor %}
+      <!--</div>-->
+
+</div>
+
+   
+
+   
+   
+   
+
+
+
+
